@@ -30,13 +30,13 @@
             android:layout_height="wrap_content"
             tools:context=".MainActivity">
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                tools:layout_editor_absoluteX="247dp"
-                tools:layout_editor_absoluteY="32dp"
-                tools:srcCompat="@drawable/ic_alarm" />
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2_home_banner"
+                android:layout_width="match_parent"
+                android:layout_height="224dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constarintLayout_home_upperBar"
@@ -99,14 +99,6 @@
                     app:srcCompat="@drawable/ic_alarm" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2_home_banner"
-                android:layout_width="match_parent"
-                android:layout_height="224dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <com.example.cashassignment.view.MissionView
                 android:id="@+id/missionView_home_newMission"

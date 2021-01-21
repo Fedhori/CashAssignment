@@ -14,7 +14,7 @@ import com.example.cashassignment.viewmodel.HomeViewModel
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val ViewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
-        binding.viewModel = ViewModel
+        binding.viewModel = viewModel
 
         binding.textViewHomePoint.setText("Hello?")
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("Hello", "Hello")
         }
 
-        val bannerData = ViewModel.getNotLoginBannerData()
+        val bannerData = viewModel.getNotLoginBannerData()
 
     }
 }
