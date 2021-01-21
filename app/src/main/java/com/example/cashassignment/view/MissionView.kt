@@ -1,8 +1,9 @@
-package com.example.cashassignment
+package com.example.cashassignment.view
 
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import com.example.cashassignment.R
 
 open class MissionView @JvmOverloads constructor(
     context: Context,
