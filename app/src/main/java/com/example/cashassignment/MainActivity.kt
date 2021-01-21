@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val bannerData = viewModel.getNotLoginBannerData()
+        val taskData = viewModel.getNotLoginTaskData()
 
     }
 }
