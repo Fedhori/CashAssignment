@@ -13,11 +13,16 @@ import com.example.cashassignment.enumclasses.TaskCategory
 import com.example.cashassignment.enumclasses.TaskOrderStrategy
 import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.TaskEntity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
-class HomeRepository(application: Application) {
+class HomeRepository(application: Application) : CoroutineScope by MainScope(){
 
     private val baseService = BaseService.getInstance()
 
@@ -36,7 +41,12 @@ class HomeRepository(application: Application) {
     fun getNotLoginBannerData(country: String): LiveData<List<BannerEntity>>{
 
         val liveData = MutableLiveData<List<BannerEntity>>()
+        launch(Dispatchers.Main){
+            liveData.value = notLoginBannerApi.getBanners(country).body()?.toList()
+        }
+        return liveData
 
+        /*
         notLoginBannerApi.getBanners(country).enqueue(object : Callback<List<BannerEntity>> {
             override fun onResponse(call: Call<List<BannerEntity>>, response: Response<List<BannerEntity>>) {
                 liveData.value = response.body()?.toList()
@@ -48,6 +58,8 @@ class HomeRepository(application: Application) {
         })
 
         return liveData
+
+         */
     }
 
     fun getTaskData(): LiveData<List<TaskEntity>>{
@@ -59,17 +71,9 @@ class HomeRepository(application: Application) {
     fun getNotLoginTaskData(country: String, page: Int = 0, category: TaskCategory = TaskCategory.ALL, orderStrategy: TaskOrderStrategy = TaskOrderStrategy.NEW): LiveData<List<TaskEntity>>{
 
         val liveData = MutableLiveData<List<TaskEntity>>()
-
-        notLoginTaskApi.getTasks(country, page, category, orderStrategy).enqueue(object : Callback<List<TaskEntity>> {
-            override fun onResponse(call: Call<List<TaskEntity>>, response: Response<List<TaskEntity>>) {
-                liveData.value = response.body()?.toList()
-            }
-
-            override fun onFailure(call: Call<List<TaskEntity>>, t: Throwable) {
-                t.stackTrace
-            }
-        })
-
+        launch(Dispatchers.Main){
+            liveData.value = notLoginTaskApi.getTasks(country, page, category, orderStrategy).body()?.toList()
+        }
         return liveData
     }
 }

@@ -27,11 +27,6 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.buttonHomeAlarm.setOnClickListener {
-            Toast.makeText(this, "Hello", Toast.LENGTH_LONG).show()
-            Log.d("Hello", "Hello")
-        }
-
         bannerViewPagerAdapter = BannerViewPagerAdapter(this)
         binding.viewPager2HomeBanner.adapter = bannerViewPagerAdapter
 
