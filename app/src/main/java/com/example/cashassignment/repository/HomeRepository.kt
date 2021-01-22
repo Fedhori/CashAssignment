@@ -35,7 +35,7 @@ class HomeRepository(application: Application) {
 
     fun getNotLoginBannerData(country: String): LiveData<List<BannerEntity>>{
 
-        val bannerEntities = MutableLiveData<List<BannerEntity>>()
+        val liveData = MutableLiveData<List<BannerEntity>>()
 
         notLoginBannerApi.getBanners(country).enqueue(object : Callback<List<BannerEntity>> {
             override fun onResponse(call: Call<List<BannerEntity>>, response: Response<List<BannerEntity>>) {
@@ -44,7 +44,7 @@ class HomeRepository(application: Application) {
 
                 if (bannerEntities != null) {
                     for(bannerEntity in bannerEntities){
-                        Log.d("Result", " \nname: ${bannerEntity.name} \n" +
+                        Log.d("test", " \nname: ${bannerEntity.name} \n" +
                                 "type: ${bannerEntity.type} \n" +
                                 "Url: ${bannerEntity.thumbnailUrl} \n" +
                                 "appGuideCoreId: ${bannerEntity.appGuideCoreId} \n" +
@@ -52,6 +52,8 @@ class HomeRepository(application: Application) {
                                 "idx: ${bannerEntity.idx} \n\n")
                     }
                 }
+
+                liveData.value = bannerEntities
             }
 
             override fun onFailure(call: Call<List<BannerEntity>>, t: Throwable) {
@@ -59,7 +61,7 @@ class HomeRepository(application: Application) {
             }
         })
 
-        return bannerEntities
+        return liveData
     }
 
     fun getTaskData(): LiveData<List<TaskEntity>>{
