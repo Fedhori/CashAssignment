@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.cashassignment.R
 import com.example.cashassignment.databinding.ActivityMainBinding.inflate
 import com.example.cashassignment.model.BannerEntity
+import kotlinx.android.synthetic.main.view_banner.view.*
 
 class BannerViewPagerAdapter(private val context: Context) :
    RecyclerView.Adapter<BannerViewPagerAdapter.ViewHolder>() {
@@ -26,8 +27,7 @@ class BannerViewPagerAdapter(private val context: Context) :
     override fun getItemCount(): Int = bannerList?.size ?: 0
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("Bind", bannerList?.get(position)?.thumbnailUrl.toString())
-        Glide.with(context).load(bannerList?.get(position)?.thumbnailUrl).into(holder.imageUrl)
+        holder.bind(bannerList?.get(position))
     }
 
     fun submitList(bannerList: List<BannerEntity>?){
@@ -35,7 +35,12 @@ class BannerViewPagerAdapter(private val context: Context) :
         notifyDataSetChanged()
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageUrl: ImageView = view.findViewById(R.id.imageView_banner)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(item: BannerEntity?){
+            with(itemView){
+                //Log.d("test", item?.name ?: "NULL")
+                Glide.with(context).load(item?.thumbnailUrl).into(itemView.imageView_banner)
+            }
+        }
     }
 }

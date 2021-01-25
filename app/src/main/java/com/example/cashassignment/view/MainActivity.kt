@@ -1,21 +1,17 @@
-package com.example.cashassignment
+package com.example.cashassignment.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.observe
+import com.example.cashassignment.R
 import com.example.cashassignment.databinding.ActivityMainBinding
-import com.example.cashassignment.view.BannerViewPagerAdapter
 import com.example.cashassignment.viewmodel.HomeViewModel
-import java.util.*
-import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bannerViewPagerAdapter: BannerViewPagerAdapter
+    private lateinit var taskViewAdapter: TaskViewAdapter
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HomeViewModel by viewModels()
 
@@ -23,18 +19,38 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        initBinding()
+        initBanner()
+        initNewMissionTask()
+    }
+
+    private fun initBinding(){
+        binding = DataBindingUtil.setContentView(this,
+                R.layout.activity_main
+        )
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+    }
 
+    private fun initBanner(){
         bannerViewPagerAdapter = BannerViewPagerAdapter(this)
         binding.viewPager2HomeBanner.adapter = bannerViewPagerAdapter
 
         val bannerData = viewModel.getNotLoginBannerData()
+
+        bannerData.observe(this, androidx.lifecycle.Observer { bannerData ->
+            bannerViewPagerAdapter.submitList(bannerData)
+        })
+    }
+
+    private fun initNewMissionTask(){
+        taskViewAdapter = TaskViewAdapter(this)
+        binding.recyclerViewNewMissionTasks.adapter = taskViewAdapter
+
         val taskData = viewModel.getNotLoginTaskData()
 
-        bannerData.observe(this, androidx.lifecycle.Observer { bannerList ->
-            bannerViewPagerAdapter.submitList(bannerList)
+        taskData.observe(this, androidx.lifecycle.Observer { taskData ->
+            taskViewAdapter.submitList(taskData)
         })
     }
 }
