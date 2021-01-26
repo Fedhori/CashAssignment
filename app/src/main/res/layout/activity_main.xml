@@ -28,6 +28,7 @@
             android:id="@+id/constarintLayout_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#EEEEEE"
             tools:context=".view.MainActivity">
 
             <androidx.viewpager2.widget.ViewPager2
@@ -112,13 +113,15 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constaraintLayout_newMission_title"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/textView_newMission_missionName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="14dp"
                         android:text="새로운 미션"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +131,7 @@
                         android:id="@+id/button_newMission_findMission"
                         style="@style/Widget.AppCompat.Button"
                         android:layout_width="95dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="#00000000"
                         android:textColor="#000000"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -141,18 +144,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="전체 보기"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_newMission_missionName"
                         app:layout_constraintStart_toStartOf="@+id/button_newMission_findMission"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView_newMission_missionName" />
 
                     <ImageView
                         android:id="@+id/icon_newMission_chevron"
                         android:layout_width="12dp"
                         android:layout_height="12dp"
                         android:layout_marginStart="4dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_newMission_findMission"
                         app:layout_constraintStart_toEndOf="@+id/textView_newMission_findMission"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView_newMission_findMission"
                         app:srcCompat="@drawable/ic_chevron_right" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -161,7 +164,9 @@
                     android:id="@+id/recyclerView_newMission_tasks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:orientation="horizontal"
+                    android:paddingLeft="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </LinearLayout>
@@ -185,6 +190,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_marginTop="38dp"
+                        android:layout_marginBottom="23dp"
                         android:text="최근 참여한 미션"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -194,7 +201,7 @@
                         android:id="@+id/button_myMission_findMission"
                         style="@style/Widget.AppCompat.Button"
                         android:layout_width="95dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="#00000000"
                         android:textColor="#000000"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -207,18 +214,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="전체 보기"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_myMission_mission"
                         app:layout_constraintStart_toStartOf="@+id/button_myMission_findMission"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView_myMission_mission" />
 
                     <ImageView
                         android:id="@+id/icon_myMission_chevron"
                         android:layout_width="12dp"
                         android:layout_height="12dp"
                         android:layout_marginStart="4dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_myMission_findMission"
                         app:layout_constraintStart_toEndOf="@+id/textView_myMission_findMission"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView_myMission_findMission"
                         app:srcCompat="@drawable/ic_chevron_right" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

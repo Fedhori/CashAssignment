@@ -3,7 +3,9 @@ package com.example.cashassignment.view
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import androidx.activity.viewModels
 import com.example.cashassignment.R
+import com.example.cashassignment.viewmodel.HomeViewModel
 
 open class MissionView @JvmOverloads constructor(
     context: Context,
