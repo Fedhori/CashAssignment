@@ -8,14 +8,19 @@ import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cashassignment.R
 import com.example.cashassignment.databinding.ActivityMainBinding
+import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.viewmodel.HomeViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.view_mission.view.*
+import kotlinx.android.synthetic.main.view_new_mission_task.view.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bannerViewPagerAdapter: BannerViewPagerAdapter
-    private lateinit var taskViewAdapter: TaskViewAdapter
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HomeViewModel by viewModels()
 
@@ -23,15 +28,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
 
+        makeStatusBarTransparent()
+        initBinding()
+        initBanner()
+        initMissions()
+    }
+
+    private fun makeStatusBarTransparent(){
         // make status bar completely transparent
         val window = window
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
-        initBinding()
-        initBanner()
-        initNewMissionTask()
-        initBundle()
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 
     private fun initBinding(){
@@ -51,18 +58,47 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun initNewMissionTask(){
-        taskViewAdapter = TaskViewAdapter(this)
-        binding.recyclerViewNewMissionTasks.adapter = taskViewAdapter
+    private fun initMissions(){
+        initNewMission()
+        initMyMission()
+        initBundle()
+    }
 
+    private fun initNewMission(){
+        val newMissionView = MissionView(this)
+        val taskViewAdapter = TaskViewAdapter(this)
         val taskData = viewModel.getTaskNotLoginData()
+
+        binding.linearLayoutHomeBundleContainer.addView(newMissionView)
+        newMissionView.textView_mission.text = "신규 미션"
+        newMissionView.recyclerView_mission.adapter = taskViewAdapter
 
         taskData.observe(this, androidx.lifecycle.Observer { taskData ->
             taskViewAdapter.submitList(taskData)
         })
     }
 
+    private fun initMyMission(){
+        //TODO implement myMission task
+    }
+
     private fun initBundle(){
-        val bundleData = viewModel.getBundleNotLoginData()
+        val bundleLiveData = viewModel.getBundleNotLoginData()
+
+        bundleLiveData.observe(this, androidx.lifecycle.Observer { bundleList ->
+            setBundle(bundleList)
+        })
+    }
+
+    private fun setBundle(bundleList: List<BundleEntity>){
+        for(bundle in bundleList){
+            val missionView = MissionView(this)
+            val taskViewAdapter = TaskViewAdapter(this)
+
+            binding.linearLayoutHomeBundleContainer.addView(missionView)
+            missionView.textView_mission.text = bundle.title
+            missionView.recyclerView_mission.adapter = taskViewAdapter
+            taskViewAdapter.submitList(bundle.taskTitles)
+        }
     }
 }
