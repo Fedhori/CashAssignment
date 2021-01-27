@@ -13,7 +13,8 @@
         android:id="@+id/linearLayout_newMission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="30dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constaraintLayout_title"
@@ -26,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="신규 미션"
+                android:textColor="@color/gray_800"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -46,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:shadowColor="@color/gray_500"
                 android:text="전체 보기"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/button_findMission"
@@ -56,6 +59,7 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginStart="4dp"
+                android:tint="@color/gray_500"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView_findMission"
                 app:layout_constraintTop_toTopOf="parent"
@@ -68,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:paddingLeft="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </layout>

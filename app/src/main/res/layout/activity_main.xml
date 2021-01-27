@@ -28,7 +28,7 @@
             android:id="@+id/constarintLayout_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#EEEEEE"
+            android:background="#FCFCFC"
             tools:context=".view.MainActivity">
 
             <androidx.viewpager2.widget.ViewPager2
@@ -54,7 +54,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/noto_sans_regular"
                     android:text="1,025,793"
+                    android:textColor="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/icon_home_point"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -64,6 +66,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginStart="18dp"
+                    app:tint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -79,6 +82,7 @@
                     android:paddingRight="14dp"
                     android:paddingBottom="16dp"
                     android:scaleType="fitCenter"
+                    android:tint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -94,6 +98,7 @@
                     android:paddingRight="14dp"
                     android:paddingBottom="16dp"
                     android:scaleType="fitCenter"
+                    android:tint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/button_home_list"
                     app:layout_constraintTop_toTopOf="parent"
@@ -108,7 +113,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewPager2_home_banner"/>
+                app:layout_constraintTop_toBottomOf="@+id/viewPager2_home_banner" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout_home_footer"
@@ -124,6 +129,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="56dp"
                     android:text="셀렉트스타 (주)"
+                    android:textColor="@color/gray_500"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -133,6 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="대표 이사 김세엽, 신호욱 / 사업자 등록번호: 626 87 011194 \n주소 대전광역시 유성구 유성대로 782 / 문의 카카오톡 캐시미션"
+                    android:textColor="@color/gray_500"
                     app:layout_constraintStart_toStartOf="@+id/textView_home_companyName"
                     app:layout_constraintTop_toBottomOf="@+id/textView_home_companyName" />
 
@@ -141,6 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="V.4.4.8"
+                    android:textColor="@color/gray_500"
                     app:layout_constraintStart_toStartOf="@+id/textView_home_companyInfo"
                     app:layout_constraintTop_toBottomOf="@+id/button_home_termsOfService" />
 
@@ -149,6 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="/"
+                    android:textColor="@color/gray_500"
                     app:layout_constraintBottom_toBottomOf="@+id/button_home_termsOfService"
                     app:layout_constraintStart_toEndOf="@+id/button_home_termsOfService"
                     app:layout_constraintTop_toTopOf="@+id/button_home_termsOfService" />
@@ -160,7 +169,7 @@
                     android:layout_height="48dp"
                     android:background="#00000000"
                     android:text="서비스 이용 약관"
-                    android:textColor="#000000"
+                    android:textColor="@color/gray_500"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_home_companyInfo" />
 
@@ -171,7 +180,7 @@
                     android:layout_height="48dp"
                     android:background="#00000000"
                     android:text="개인정보처리방침"
-                    android:textColor="#000000"
+                    android:textColor="@color/gray_500"
                     app:layout_constraintStart_toEndOf="@+id/textView_home_slash"
                     app:layout_constraintTop_toTopOf="@+id/button_home_termsOfService" />
             </androidx.constraintlayout.widget.ConstraintLayout>

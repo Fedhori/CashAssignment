@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         val taskData = viewModel.getTaskNotLoginData()
 
         binding.linearLayoutHomeBundleContainer.addView(newMissionView)
-        newMissionView.textView_mission.text = "신규 미션"
+        newMissionView.textView_mission.text = "새로운 미션"
         newMissionView.recyclerView_mission.adapter = taskViewAdapter
 
         taskData.observe(this, androidx.lifecycle.Observer { taskData ->

@@ -38,7 +38,6 @@ class BannerViewPagerAdapter(private val context: Context) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: BannerEntity?){
             with(itemView){
-                //Log.d("test", item?.name ?: "NULL")
                 Glide.with(context).load(item?.thumbnailUrl).into(itemView.imageView_banner)
             }
         }
