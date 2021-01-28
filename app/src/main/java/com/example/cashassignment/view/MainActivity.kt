@@ -1,22 +1,16 @@
 package com.example.cashassignment.view
 
-import android.graphics.Color
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.example.cashassignment.R
 import com.example.cashassignment.databinding.ActivityMainBinding
 import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.viewmodel.HomeViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.view_mission.view.*
-import kotlinx.android.synthetic.main.view_new_mission_task.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,6 +50,10 @@ class MainActivity : AppCompatActivity() {
         bannerData.observe(this, androidx.lifecycle.Observer { bannerData ->
             bannerViewPagerAdapter.submitList(bannerData)
         })
+
+        TabLayoutMediator(binding.tabLayoutHomeBanner, binding.viewPager2HomeBanner){ tab, position ->
+            //TODO implement tabLayout
+        }.attach()
     }
 
     private fun initMissions(){
@@ -66,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNewMission(){
         val newMissionView = MissionView(this)
-        val taskViewAdapter = TaskViewAdapter(this)
+        val taskViewAdapter = NewMissionViewAdapter()
         val taskData = viewModel.getTaskNotLoginData()
 
         binding.linearLayoutHomeBundleContainer.addView(newMissionView)
@@ -79,7 +77,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initMyMission(){
-        //TODO implement myMission task
+        val newMissionView = MissionView(this)
+        val taskViewAdapter = MyMissionViewAdapter()
+        //TODO current is taskData -> you need to change it to other data later
+        val taskData = viewModel.getTaskNotLoginData()
+
+        binding.linearLayoutHomeBundleContainer.addView(newMissionView)
+        newMissionView.textView_mission.text = "최근 참여한 미션"
+        newMissionView.recyclerView_mission.adapter = taskViewAdapter
+
+        taskData.observe(this, androidx.lifecycle.Observer { taskData ->
+            taskViewAdapter.submitList(taskData)
+        })
     }
 
     private fun initBundle(){
@@ -93,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     private fun setBundle(bundleList: List<BundleEntity>){
         for(bundle in bundleList){
             val missionView = MissionView(this)
-            val taskViewAdapter = TaskViewAdapter(this)
+            val taskViewAdapter = NewMissionViewAdapter()
 
             binding.linearLayoutHomeBundleContainer.addView(missionView)
             missionView.textView_mission.text = bundle.title

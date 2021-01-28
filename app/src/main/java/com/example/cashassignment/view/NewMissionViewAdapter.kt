@@ -2,7 +2,6 @@ package com.example.cashassignment.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +13,7 @@ import com.example.cashassignment.enumclasses.Level
 import com.example.cashassignment.model.TaskEntity
 import kotlinx.android.synthetic.main.view_new_mission_task.view.*
 
-class TaskViewAdapter(private val context: Context) :
-    RecyclerView.Adapter<TaskViewAdapter.ViewHolder>() {
+class NewMissionViewAdapter: RecyclerView.Adapter<NewMissionViewAdapter.ViewHolder>() {
 
     private var taskList: List<TaskEntity>? = null
 
@@ -54,7 +52,7 @@ class TaskViewAdapter(private val context: Context) :
                     progressBar_task.progress = 0
                 }
                 else{
-                    progressBar_task.progress = item.progress / item.targetAmount
+                    progressBar_task.progress = item.progress * 100 / item.targetAmount
                 }
 
                 when(item?.level){
