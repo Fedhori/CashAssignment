@@ -10,7 +10,7 @@ import com.example.cashassignment.repository.HomeRepository
 
 class HomeViewModel(application: Application): AndroidViewModel(application) {
 
-    private val homeRepository = HomeRepository(application)
+    private val homeRepository = HomeRepository()
 
     fun getBannerData() : LiveData<List<BannerEntity>>{
         return homeRepository.getBannerData()

@@ -16,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class HomeRepository(application: Application) : CoroutineScope by MainScope(){
+class HomeRepository() : CoroutineScope by MainScope(){
 
     private val baseService = BaseService.getInstance()
 
