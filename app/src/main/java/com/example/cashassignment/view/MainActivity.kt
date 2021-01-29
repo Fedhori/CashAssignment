@@ -2,6 +2,8 @@ package com.example.cashassignment.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -67,6 +69,12 @@ class MainActivity : AppCompatActivity() {
         val taskViewAdapter = NewMissionViewAdapter()
         val taskData = viewModel.getTaskNotLoginData()
 
+        taskViewAdapter.setItemClickListener( object: ItemClickListener{
+            override fun onClick(view: View, position: Int) {
+                Log.d("test", "${taskData.value?.get(position)?.title}")
+            }
+        })
+
         binding.linearLayoutHomeBundleContainer.addView(newMissionView)
         newMissionView.textView_mission.text = "새로운 미션"
         newMissionView.recyclerView_mission.adapter = taskViewAdapter
@@ -81,6 +89,12 @@ class MainActivity : AppCompatActivity() {
         val taskViewAdapter = MyMissionViewAdapter()
         //TODO current is taskData -> you need to change it to other data later
         val taskData = viewModel.getTaskNotLoginData()
+
+        taskViewAdapter.setItemClickListener( object: ItemClickListener{
+            override fun onClick(view: View, position: Int) {
+                Log.d("test", "${taskData.value?.get(position)?.title}")
+            }
+        })
 
         binding.linearLayoutHomeBundleContainer.addView(newMissionView)
         newMissionView.textView_mission.text = "최근 참여한 미션"

@@ -59,7 +59,7 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginStart="4dp"
-                android:tint="@color/gray_500"
+                app:tint="@color/gray_500"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView_findMission"
                 app:layout_constraintTop_toTopOf="parent"

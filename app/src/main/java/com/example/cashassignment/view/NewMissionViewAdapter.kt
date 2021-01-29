@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.view_new_mission_task.view.*
 class NewMissionViewAdapter: RecyclerView.Adapter<NewMissionViewAdapter.ViewHolder>() {
 
     private var taskList: List<TaskEntity>? = null
+    private lateinit var itemClickListener: ItemClickListener
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -27,12 +28,20 @@ class NewMissionViewAdapter: RecyclerView.Adapter<NewMissionViewAdapter.ViewHold
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(taskList?.get(position))
+
+        holder.itemView.setOnClickListener{
+            itemClickListener.onClick(it, position)
+        }
     }
 
     fun submitList(taskList: List<TaskEntity>?){
         this.taskList = taskList
 
         notifyDataSetChanged()
+    }
+
+    fun setItemClickListener(itemClickListener: ItemClickListener){
+        this.itemClickListener = itemClickListener
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
