@@ -3,6 +3,7 @@ package com.example.cashassignment.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
@@ -11,14 +12,19 @@ import com.example.cashassignment.R
 import com.example.cashassignment.databinding.ActivityMainBinding
 import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.viewmodel.HomeViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_mission.view.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
 
     private lateinit var bannerViewPagerAdapter: BannerViewPagerAdapter
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HomeViewModel by viewModels()
+
+    private lateinit var homeFragment: HomeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +34,11 @@ class MainActivity : AppCompatActivity() {
         initBinding()
         initBanner()
         initMissions()
+
+        val bottomNavigationView = bottomNavigationView_home as BottomNavigationView
+        bottomNavigationView.setOnNavigationItemSelectedListener(this)
+
+        bottomNavigationView.selectedItemId = R.id.navigation_home
     }
 
     private fun makeStatusBarTransparent(){
@@ -123,5 +134,23 @@ class MainActivity : AppCompatActivity() {
             missionView.recyclerView_mission.adapter = taskViewAdapter
             taskViewAdapter.submitList(bundle.taskTitles)
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.navigation_home ->{
+                val homeFragment = HomeFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, homeFragment).commit()
+            }
+            R.id.navigation_all_mission ->{
+                val homeFragment = HomeFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, homeFragment).commit()
+            }
+            R.id.navigation_my_mission ->{
+                val homeFragment = HomeFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, homeFragment).commit()
+            }
+        }
+        return true
     }
 }

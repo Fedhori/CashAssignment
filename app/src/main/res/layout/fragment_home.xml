@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.HomeFragment">
+
+    <ScrollView
+        android:id="@+id/scrollView_home"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="false"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:id="@+id/constarintLayout_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FCFCFC"
+            tools:context=".view.MainActivity">
+
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/viewPager2_home_banner"
+                app:layout_constraintEnd_toEndOf="@+id/viewPager2_home_banner"
+                app:layout_constraintStart_toStartOf="@+id/viewPager2_home_banner"
+                app:layout_constraintTop_toTopOf="@+id/viewPager2_home_banner" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2_home_banner"
+                android:layout_width="match_parent"
+                android:layout_height="224dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.viewpager2.widget.ViewPager2>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout_home_banner"
+                android:layout_width="40dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="#00FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/viewPager2_home_banner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabIndicatorColor="#00FFFFFF"></com.google.android.material.tabs.TabLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constarintLayout_home_upperBar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView_home_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/noto_sans_regular"
+                    android:text="1,025,793"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/icon_home_point"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/icon_home_point"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="18dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_point"
+                    app:tint="#FFFFFF" />
+
+                <ImageButton
+                    android:id="@+id/button_home_list"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="#00000000"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="16dp"
+                    android:paddingRight="14dp"
+                    android:paddingBottom="16dp"
+                    android:scaleType="fitCenter"
+                    android:tint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_list" />
+
+                <ImageButton
+                    android:id="@+id/button_home_alarm"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="#00000000"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="16dp"
+                    android:paddingRight="14dp"
+                    android:paddingBottom="16dp"
+                    android:scaleType="fitCenter"
+                    android:tint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button_home_list"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_alarm" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_home_bundleContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewPager2_home_banner" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout_home_footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout_home_bundleContainer">
+
+                <TextView
+                    android:id="@+id/textView_home_companyName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="56dp"
+                    android:text="셀렉트스타 (주)"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView_home_companyInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="대표 이사 김세엽, 신호욱 / 사업자 등록번호: 626 87 011194 \n주소 대전광역시 유성구 유성대로 782 / 문의 카카오톡 캐시미션"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintStart_toStartOf="@+id/textView_home_companyName"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_home_companyName" />
+
+                <TextView
+                    android:id="@+id/textView_home_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="V.4.4.8"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintStart_toStartOf="@+id/textView_home_companyInfo"
+                    app:layout_constraintTop_toBottomOf="@+id/button_home_termsOfService" />
+
+                <TextView
+                    android:id="@+id/textView_home_slash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_home_termsOfService"
+                    app:layout_constraintStart_toEndOf="@+id/button_home_termsOfService"
+                    app:layout_constraintTop_toTopOf="@+id/button_home_termsOfService" />
+
+                <Button
+                    android:id="@+id/button_home_termsOfService"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:background="#00000000"
+                    android:text="서비스 이용 약관"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_home_companyInfo" />
+
+                <Button
+                    android:id="@+id/button_home_privacyPolicy"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:background="#00000000"
+                    android:text="개인정보처리방침"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintStart_toEndOf="@+id/textView_home_slash"
+                    app:layout_constraintTop_toTopOf="@+id/button_home_termsOfService" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>
