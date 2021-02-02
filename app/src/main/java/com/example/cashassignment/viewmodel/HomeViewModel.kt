@@ -3,14 +3,17 @@ package com.example.cashassignment.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.model.TaskEntity
 import com.example.cashassignment.repository.HomeRepository
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class HomeViewModel(application: Application): AndroidViewModel(application) {
+class HomeViewModel: ViewModel(), KoinComponent {
 
-    private val homeRepository = HomeRepository()
+    private val homeRepository : HomeRepository by inject()
 
     fun getBannerData() : LiveData<List<BannerEntity>>{
         return homeRepository.getBannerData()

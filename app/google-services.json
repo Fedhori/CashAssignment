@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": 29611060662,
+    "firebase_url": "https://cashmission-v2-dev.firebaseio.com",
+    "project_id": "cashmission-v2-dev",
+    "storage_bucket": "cashmission-v2-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29611060662:android:68424167671eaeea722517",
+        "android_client_info": {
+          "package_name": "com.example.cashassignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29611060662-s1f9bqt37et5dt1bjfikg4q73rhm1nr6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cashassignment",
+            "certificate_hash": "4bb0f5f310caeca75689daa8b758a47ef4659f41"
+          }
+        },
+        {
+          "client_id": "29611060662-h44cb6m1hvfsm40hheq62g5rl1llmv94.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cashassignment",
+            "certificate_hash": "2bf8642bfc084add62dac44c3148f1203cf77617"
+          }
+        },
+        {
+          "client_id": "29611060662-vuanuis18aiv8picjj4ai9vrkft3jeti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCjynmSTk63kKhBbQspgswliwARV8p3P8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29611060662-vuanuis18aiv8picjj4ai9vrkft3jeti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": 1
+}

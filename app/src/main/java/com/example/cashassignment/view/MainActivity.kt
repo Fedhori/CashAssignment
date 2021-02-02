@@ -4,17 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowManager
-import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
 import com.example.cashassignment.R
-import com.example.cashassignment.databinding.ActivityMainBinding
 import com.example.cashassignment.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
 
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +21,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         makeStatusBarTransparent()
         //initBinding()
         bottomNavigationView_home.setOnNavigationItemSelectedListener(this)
-        initHome(homeViewModel)
+        bottomNavigationView_home.selectedItemId = R.id.navigation_home
     }
 
     private fun makeStatusBarTransparent(){
