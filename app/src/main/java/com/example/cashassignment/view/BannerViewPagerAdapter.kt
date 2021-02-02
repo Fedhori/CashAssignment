@@ -1,11 +1,9 @@
 package com.example.cashassignment.view
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cashassignment.R
@@ -13,7 +11,7 @@ import com.example.cashassignment.databinding.ActivityMainBinding.inflate
 import com.example.cashassignment.model.BannerEntity
 import kotlinx.android.synthetic.main.view_banner.view.*
 
-class BannerViewPagerAdapter(private val context: Context) :
+class BannerViewPagerAdapter(private val context: HomeFragment) :
    RecyclerView.Adapter<BannerViewPagerAdapter.ViewHolder>() {
 
     private var bannerList: List<BannerEntity>? = null

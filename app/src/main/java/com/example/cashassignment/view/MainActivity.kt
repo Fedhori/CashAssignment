@@ -2,43 +2,28 @@ package com.example.cashassignment.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.cashassignment.R
 import com.example.cashassignment.databinding.ActivityMainBinding
-import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.view_mission.view.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
 
-    private lateinit var bannerViewPagerAdapter: BannerViewPagerAdapter
-    private lateinit var binding: ActivityMainBinding
-    private val viewModel: HomeViewModel by viewModels()
-
-    private lateinit var homeFragment: HomeFragment
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
         makeStatusBarTransparent()
-        initBinding()
-        initBanner()
-        initMissions()
-
-        val bottomNavigationView = bottomNavigationView_home as BottomNavigationView
-        bottomNavigationView.setOnNavigationItemSelectedListener(this)
-
-        bottomNavigationView.selectedItemId = R.id.navigation_home
+        //initBinding()
+        bottomNavigationView_home.setOnNavigationItemSelectedListener(this)
+        initHome(homeViewModel)
     }
 
     private fun makeStatusBarTransparent(){
@@ -48,26 +33,23 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 
+    /*
+
     private fun initBinding(){
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding.viewModel = homeViewModel
     }
 
-    private fun initBanner(){
-        bannerViewPagerAdapter = BannerViewPagerAdapter(this)
-        binding.viewPager2HomeBanner.adapter = bannerViewPagerAdapter
+     */
 
-        val bannerData = viewModel.getBannerNotLoginData()
-
-        bannerData.observe(this, androidx.lifecycle.Observer { bannerData ->
-            bannerViewPagerAdapter.submitList(bannerData)
-        })
-
-        TabLayoutMediator(binding.tabLayoutHomeBanner, binding.viewPager2HomeBanner){ tab, position ->
-            //TODO implement tabLayout
-        }.attach()
+    private fun initHome(viewModel: HomeViewModel){
+        val homeFragment = HomeFragment()
+        homeFragment.setViewModel(viewModel)
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, homeFragment).commit()
     }
+
+    /*
 
     private fun initMissions(){
         initNewMission()
@@ -136,19 +118,18 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
     }
 
+    */
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.navigation_home ->{
-                val homeFragment = HomeFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, homeFragment).commit()
+                initHome(homeViewModel)
             }
             R.id.navigation_all_mission ->{
-                val homeFragment = HomeFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, homeFragment).commit()
+                initHome(homeViewModel)
             }
             R.id.navigation_my_mission ->{
-                val homeFragment = HomeFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, homeFragment).commit()
+                initHome(homeViewModel)
             }
         }
         return true

@@ -30,6 +30,7 @@ class HomeRepository() : CoroutineScope by MainScope(){
     private val notLoginBundleApi = baseService.create(BundleNotLoginApi::class.java)
 
     fun getBannerData(): LiveData<List<BannerEntity>>{
+        //TODO
         return MutableLiveData<List<BannerEntity>>()
     }
 
@@ -43,6 +44,7 @@ class HomeRepository() : CoroutineScope by MainScope(){
     }
 
     fun getTaskData(): LiveData<List<TaskEntity>>{
+        //TODO
         return MutableLiveData<List<TaskEntity>>()
     }
 
@@ -56,6 +58,7 @@ class HomeRepository() : CoroutineScope by MainScope(){
     }
 
     fun getBundleData(): LiveData<List<BundleEntity>>{
+        //TODO
         return MutableLiveData<List<BundleEntity>>()
     }
 
