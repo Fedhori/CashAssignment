@@ -8,9 +8,11 @@ import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.model.TaskEntity
 import com.example.cashassignment.repository.HomeRepository
+import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+@KoinApiExtension
 class HomeViewModel: ViewModel(), KoinComponent {
 
     private val homeRepository : HomeRepository by inject()
