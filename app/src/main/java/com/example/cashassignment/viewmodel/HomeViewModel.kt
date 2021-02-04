@@ -21,23 +21,11 @@ class HomeViewModel: ViewModel(), KoinComponent {
         return homeRepository.getBannerData()
     }
 
-    fun getBannerNotLoginData() : LiveData<List<BannerEntity>>{
-        return homeRepository.getBannerNotLoginData("KO")
-    }
-
     fun getTaskData() : LiveData<List<TaskEntity>>{
         return homeRepository.getTaskData()
     }
 
-    fun getTaskNotLoginData() : LiveData<List<TaskEntity>>{
-        return homeRepository.getTaskNotLoginData("KO")
-    }
-
     fun getBundleData() : LiveData<List<BundleEntity>>{
         return homeRepository.getBundleData()
-    }
-
-    fun getBundleNotLoginData() : LiveData<List<BundleEntity>>{
-        return homeRepository.getBundleNotLoginData("KO")
     }
 }

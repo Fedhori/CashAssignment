@@ -1,8 +1,10 @@
 package com.example.cashassignment.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.example.cashassignment.R
 import com.example.cashassignment.viewmodel.LoginViewModel
@@ -37,7 +39,14 @@ class LoginActivity : AppCompatActivity(), CoroutineScope by MainScope(){
         val tokenLiveData = loginViewModel.loginWithEmailAndPassword(email, password)
 
         tokenLiveData.observe(this, androidx.lifecycle.Observer {
-            Log.d("test", it ?: "not exist!")
+            when(it){
+                "failed" -> Toast.makeText(this, "NOPE", Toast.LENGTH_SHORT).show()
+
+                else -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
+            }
         })
     }
 }

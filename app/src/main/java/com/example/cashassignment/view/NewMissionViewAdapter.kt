@@ -45,7 +45,6 @@ class NewMissionViewAdapter: RecyclerView.Adapter<NewMissionViewAdapter.ViewHold
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @SuppressLint("ResourceAsColor")
         fun bind(item: TaskEntity?){
             with(itemView){
                 Glide.with(context).load(item?.mainSmallThumbnailUrl).into(itemView.imageView_task)

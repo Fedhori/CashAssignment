@@ -2,6 +2,7 @@ package com.example.cashassignment.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.WindowManager
 import com.example.cashassignment.R
@@ -16,8 +17,6 @@ import kotlinx.coroutines.tasks.await
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
-
-    private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +45,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
      */
 
-    private fun initHome(viewModel: HomeViewModel){
-        val homeFragment = HomeFragment()
-        homeFragment.setViewModel(viewModel)
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, homeFragment).commit()
+    private fun initHome(){
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, HomeFragment()).commit()
     }
 
     /*
@@ -126,13 +123,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.navigation_home ->{
-                initHome(homeViewModel)
+                initHome()
             }
             R.id.navigation_all_mission ->{
-                initHome(homeViewModel)
+                initHome()
             }
             R.id.navigation_my_mission ->{
-                initHome(homeViewModel)
+                initHome()
             }
         }
         return true

@@ -15,10 +15,12 @@ import com.example.cashassignment.viewmodel.HomeViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.view_mission.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.java.KoinJavaComponent.inject
 
 class HomeFragment : Fragment() {
 
-    lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel : HomeViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,14 +31,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setBanners(homeViewModel.getBannerNotLoginData())
-        setNewMissions(homeViewModel.getTaskNotLoginData())
-        setMyMissions(homeViewModel.getTaskNotLoginData())
-        setBundles(homeViewModel.getBundleNotLoginData())
-    }
-
-    fun setViewModel(viewModel: HomeViewModel){
-        homeViewModel = viewModel
+        setBanners(homeViewModel.getBannerData())
+        setNewMissions(homeViewModel.getTaskData())
+        setMyMissions(homeViewModel.getTaskData())
+        setBundles(homeViewModel.getBundleData())
     }
 
     private fun setBanners(bannerLiveData: LiveData<List<BannerEntity>>){
@@ -101,6 +99,12 @@ class HomeFragment : Fragment() {
         for(bundle in bundleData){
             val missionView = MissionView(this)
             val taskViewAdapter = NewMissionViewAdapter()
+
+            taskViewAdapter.setItemClickListener( object: ItemClickListener{
+                override fun onClick(view: View, position: Int) {
+                    Log.d("test", bundle.taskTitles[position].title)
+                }
+            })
 
             linearLayout_home_bundleContainer.addView(missionView)
             missionView.textView_mission.text = bundle.title
