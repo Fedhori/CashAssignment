@@ -3,29 +3,86 @@ package com.example.cashassignment.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.MenuItem
+import android.view.View
 import android.view.WindowManager
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.cashassignment.R
-import com.example.cashassignment.viewmodel.HomeViewModel
+import com.example.cashassignment.item.DrawerNavigationItem
+import com.example.cashassignment.item.DrawerPointItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlinx.android.synthetic.main.drawer_home.*
+import kotlinx.android.synthetic.main.drawer_home.view.*
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity(),
+    BottomNavigationView.OnNavigationItemSelectedListener,
+    NavigationView.OnNavigationItemSelectedListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         makeStatusBarTransparent()
-        //initBinding()
+        setDrawer()
         bottomNavigationView_home.setOnNavigationItemSelectedListener(this)
         bottomNavigationView_home.selectedItemId = R.id.navigation_home
+    }
+
+    fun openDrawer(){
+        drawerLayout_home.openDrawer(GravityCompat.END)
+    }
+
+    private fun setDrawer(){
+        setDrawerPointAdapter()
+        setDrawerNavigationAdapter()
+    }
+    
+    private fun setDrawerPointAdapter(){
+        val drawerPointAdapter = DrawerPointAdapter()
+        val pointItemList = ArrayList<DrawerPointItem>()
+
+        layout_navigationView.recyclerView_drawer_point.adapter = drawerPointAdapter
+
+        //TODO fetch data from API
+        with(pointItemList){
+            add(DrawerPointItem("검사 통과 시 적립금", 2780))
+            add(DrawerPointItem("누적 적립금", 37230))
+            add(DrawerPointItem("출금 가능한 금액", 77230))
+        }
+
+        drawerPointAdapter.submitList(pointItemList)
+
+        drawerPointAdapter.setItemClickListener( object: ItemClickListener{
+            override fun onClick(view: View, position: Int) {
+                Log.d("test", pointItemList[position].title)
+            }
+        })
+    }
+
+    private fun setDrawerNavigationAdapter(){
+        val drawerNavigationAdapter = DrawerNavigationAdapter()
+        val navigationItemList = ArrayList<DrawerNavigationItem>()
+
+        layout_navigationView.recyclerView_drawer_navigation.adapter = drawerNavigationAdapter
+
+        with(navigationItemList){
+            add(DrawerNavigationItem("공지사항"))
+            add(DrawerNavigationItem("캐시미션 가이드"))
+            add(DrawerNavigationItem("추천 제도"))
+            add(DrawerNavigationItem("문의하기"))
+        }
+
+        drawerNavigationAdapter.submitList(navigationItemList)
+
+        drawerNavigationAdapter.setItemClickListener( object: ItemClickListener{
+            override fun onClick(view: View, position: Int) {
+                Log.d("test", navigationItemList[position].title)
+            }
+        })
     }
 
     private fun makeStatusBarTransparent(){
@@ -35,90 +92,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 
-    /*
-
-    private fun initBinding(){
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.lifecycleOwner = this
-        binding.viewModel = homeViewModel
-    }
-
-     */
-
     private fun initHome(){
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, HomeFragment()).commit()
     }
-
-    /*
-
-    private fun initMissions(){
-        initNewMission()
-        initMyMission()
-        initBundle()
-    }
-
-    private fun initNewMission(){
-        val newMissionView = MissionView(this)
-        val taskViewAdapter = NewMissionViewAdapter()
-        val taskData = viewModel.getTaskNotLoginData()
-
-        taskViewAdapter.setItemClickListener( object: ItemClickListener{
-            override fun onClick(view: View, position: Int) {
-                Log.d("test", "${taskData.value?.get(position)?.title}")
-            }
-        })
-
-        binding.linearLayoutHomeBundleContainer.addView(newMissionView)
-        newMissionView.textView_mission.text = "새로운 미션"
-        newMissionView.recyclerView_mission.adapter = taskViewAdapter
-
-        taskData.observe(this, androidx.lifecycle.Observer { taskData ->
-            taskViewAdapter.submitList(taskData)
-        })
-    }
-
-    private fun initMyMission(){
-        val newMissionView = MissionView(this)
-        val taskViewAdapter = MyMissionViewAdapter()
-        //TODO current is taskData -> you need to change it to other data later
-        val taskData = viewModel.getTaskNotLoginData()
-
-        taskViewAdapter.setItemClickListener( object: ItemClickListener{
-            override fun onClick(view: View, position: Int) {
-                Log.d("test", "${taskData.value?.get(position)?.title}")
-            }
-        })
-
-        binding.linearLayoutHomeBundleContainer.addView(newMissionView)
-        newMissionView.textView_mission.text = "최근 참여한 미션"
-        newMissionView.recyclerView_mission.adapter = taskViewAdapter
-
-        taskData.observe(this, androidx.lifecycle.Observer { taskData ->
-            taskViewAdapter.submitList(taskData)
-        })
-    }
-
-    private fun initBundle(){
-        val bundleLiveData = viewModel.getBundleNotLoginData()
-
-        bundleLiveData.observe(this, androidx.lifecycle.Observer { bundleList ->
-            setBundle(bundleList)
-        })
-    }
-
-    private fun setBundle(bundleList: List<BundleEntity>){
-        for(bundle in bundleList){
-            val missionView = MissionView(this)
-            val taskViewAdapter = NewMissionViewAdapter()
-
-            binding.linearLayoutHomeBundleContainer.addView(missionView)
-            missionView.textView_mission.text = bundle.title
-            missionView.recyclerView_mission.adapter = taskViewAdapter
-            taskViewAdapter.submitList(bundle.taskTitles)
-        }
-    }
-
-    */
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){

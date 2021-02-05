@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.LiveData
 import com.example.cashassignment.R
 import com.example.cashassignment.model.BannerEntity
@@ -13,6 +14,8 @@ import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.model.TaskEntity
 import com.example.cashassignment.viewmodel.HomeViewModel
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.drawer_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.view_mission.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -31,10 +34,17 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUI()
         setBanners(homeViewModel.getBannerData())
         setNewMissions(homeViewModel.getTaskData())
         setMyMissions(homeViewModel.getTaskData())
         setBundles(homeViewModel.getBundleData())
+    }
+
+    private fun setUI(){
+        button_home_list.setOnClickListener{
+            (activity as MainActivity).openDrawer()
+        }
     }
 
     private fun setBanners(bannerLiveData: LiveData<List<BannerEntity>>){

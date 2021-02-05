@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cashassignment.R
-import com.example.cashassignment.databinding.ActivityMainBinding.inflate
 import com.example.cashassignment.model.BannerEntity
 import kotlinx.android.synthetic.main.view_banner.view.*
 
