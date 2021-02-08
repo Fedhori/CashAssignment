@@ -3,12 +3,10 @@ package com.example.cashassignment.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.LiveData
 import com.example.cashassignment.R
 import com.example.cashassignment.item.DrawerNavigationItem
@@ -18,7 +16,6 @@ import com.example.cashassignment.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.drawer_home.*
 import kotlinx.android.synthetic.main.drawer_home.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -63,10 +60,10 @@ class MainActivity : AppCompatActivity(),
         val drawerPointAdapter = DrawerPointAdapter()
         val pointItemList = ArrayList<DrawerPointItem>()
 
-        layout_navigationView.recyclerView_drawer_point.adapter = drawerPointAdapter
+        layout_navigationView.recyclerView_drawer_login_point.adapter = drawerPointAdapter
 
         userDetailLiveData.observe(this, androidx.lifecycle.Observer { userDetailData ->
-            layout_navigationView.textView_drawer_codeName.text = "${userDetailData.nickname} 요원님"
+            layout_navigationView.textView_drawer_login_codeName.text = "${userDetailData.nickname} 요원님"
             with(pointItemList){
                 add(DrawerPointItem("검사 통과 시 적립금", userDetailData.pendingPoint))
                 add(DrawerPointItem("누적 적립금", userDetailData.totalPoint))
