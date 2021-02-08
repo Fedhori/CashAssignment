@@ -9,18 +9,24 @@ import android.view.View
 import android.view.WindowManager
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.LiveData
 import com.example.cashassignment.R
 import com.example.cashassignment.item.DrawerNavigationItem
 import com.example.cashassignment.item.DrawerPointItem
+import com.example.cashassignment.model.UserDetailEntity
+import com.example.cashassignment.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_home.*
 import kotlinx.android.synthetic.main.drawer_home.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(),
     BottomNavigationView.OnNavigationItemSelectedListener,
     NavigationView.OnNavigationItemSelectedListener{
+
+    private val homeViewModel : HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +34,10 @@ class MainActivity : AppCompatActivity(),
 
         makeStatusBarTransparent()
         setDrawer()
+        selectHomeNavigation()
+    }
+
+    private fun selectHomeNavigation(){
         bottomNavigationView_home.setOnNavigationItemSelectedListener(this)
         bottomNavigationView_home.selectedItemId = R.id.navigation_home
     }
@@ -36,25 +46,34 @@ class MainActivity : AppCompatActivity(),
         drawerLayout_home.openDrawer(GravityCompat.END)
     }
 
+    //TODO implement setOnClickListener
     private fun setDrawer(){
-        setDrawerPointAdapter()
+        if(homeViewModel.checkIsLogin()){
+            setDrawerPointAdapter(homeViewModel.getUserDetail())
+            layout_navigationView.constraintLayout_drawer_notLogin.visibility = View.GONE
+        }
+        else{
+            layout_navigationView.constraintLayout_drawer_login.visibility = View.GONE
+        }
+
         setDrawerNavigationAdapter()
     }
     
-    private fun setDrawerPointAdapter(){
+    private fun setDrawerPointAdapter(userDetailLiveData: LiveData<UserDetailEntity>){
         val drawerPointAdapter = DrawerPointAdapter()
         val pointItemList = ArrayList<DrawerPointItem>()
 
         layout_navigationView.recyclerView_drawer_point.adapter = drawerPointAdapter
 
-        //TODO fetch data from API
-        with(pointItemList){
-            add(DrawerPointItem("검사 통과 시 적립금", 2780))
-            add(DrawerPointItem("누적 적립금", 37230))
-            add(DrawerPointItem("출금 가능한 금액", 77230))
-        }
-
-        drawerPointAdapter.submitList(pointItemList)
+        userDetailLiveData.observe(this, androidx.lifecycle.Observer { userDetailData ->
+            layout_navigationView.textView_drawer_codeName.text = "${userDetailData.nickname} 요원님"
+            with(pointItemList){
+                add(DrawerPointItem("검사 통과 시 적립금", userDetailData.pendingPoint))
+                add(DrawerPointItem("누적 적립금", userDetailData.totalPoint))
+                add(DrawerPointItem("출금 가능한 금액", userDetailData.currentPoint))
+            }
+            drawerPointAdapter.submitList(pointItemList)
+        })
 
         drawerPointAdapter.setItemClickListener( object: ItemClickListener{
             override fun onClick(view: View, position: Int) {

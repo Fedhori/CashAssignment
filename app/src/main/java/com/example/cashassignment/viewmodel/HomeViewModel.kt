@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.model.TaskEntity
+import com.example.cashassignment.model.UserDetailEntity
 import com.example.cashassignment.repository.HomeRepository
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
@@ -16,6 +17,14 @@ import org.koin.core.component.inject
 class HomeViewModel: ViewModel(), KoinComponent {
 
     private val homeRepository : HomeRepository by inject()
+
+    fun checkIsLogin(): Boolean{
+        return homeRepository.checkIsLogin()
+    }
+
+    fun getUserDetail(): LiveData<UserDetailEntity>{
+        return homeRepository.getUserDetail()
+    }
 
     fun getBannerData() : LiveData<List<BannerEntity>>{
         return homeRepository.getBannerData()

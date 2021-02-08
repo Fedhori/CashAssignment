@@ -13,6 +13,7 @@ import com.example.cashassignment.enumclasses.TaskOrderStrategy
 import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.model.TaskEntity
+import com.example.cashassignment.model.UserDetailEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -31,12 +32,14 @@ class HomeRepository : CoroutineScope by MainScope(){
     private val bundleApi = baseService.create(BundleApi::class.java)
     private val bundleNotLoginApi = baseService.create(BundleNotLoginApi::class.java)
 
+    private val userDetailApi = baseService.create(UserDetailApi::class.java)
+
     private val privacyDetailApi = baseService.create(PrivacyDetailApi::class.java)
 
     private val sharedPreferences: SharedPreferences = KoinApplication.instance.context().
     getSharedPreferences("storage", Activity.MODE_PRIVATE)
 
-    private fun checkIsLogin(): Boolean{
+    fun checkIsLogin(): Boolean{
         return sharedPreferences.getBoolean("isLogin", false)
     }
 
@@ -46,6 +49,16 @@ class HomeRepository : CoroutineScope by MainScope(){
 
     private fun getAuthType(): AuthType{
         return AuthType.valueOf(sharedPreferences.getString("authType", "PHONE")?: "")
+    }
+
+    fun getUserDetail(): LiveData<UserDetailEntity>{
+        val liveData = MutableLiveData<UserDetailEntity>()
+
+        launch(Dispatchers.Main){
+            liveData.value = userDetailApi.getUserDetail(getToken(), getAuthType()).body()
+        }
+
+        return liveData
     }
 
     fun getBannerData(): LiveData<List<BannerEntity>>{
