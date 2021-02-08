@@ -1,9 +1,7 @@
 package com.example.cashassignment.repository
 
 import android.app.Activity
-import android.app.Application
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cashassignment.BaseService
@@ -15,7 +13,6 @@ import com.example.cashassignment.enumclasses.TaskOrderStrategy
 import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.model.TaskEntity
-import com.example.cashassignment.model.UserDetailEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -34,7 +31,7 @@ class HomeRepository : CoroutineScope by MainScope(){
     private val bundleApi = baseService.create(BundleApi::class.java)
     private val bundleNotLoginApi = baseService.create(BundleNotLoginApi::class.java)
 
-    private val userDetailApi = baseService.create(UserDetailApi::class.java)
+    private val privacyDetailApi = baseService.create(PrivacyDetailApi::class.java)
 
     private val sharedPreferences: SharedPreferences = KoinApplication.instance.context().
     getSharedPreferences("storage", Activity.MODE_PRIVATE)

@@ -2,7 +2,7 @@ package com.example.cashassignment.model
 
 import com.google.gson.annotations.SerializedName
 
-data class UserDetailEntity(
+data class PrivacyDetailEntity(
     @SerializedName("birthYear")
     val birthYear: Int,
 
