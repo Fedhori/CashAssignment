@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.AllMissionFragment">
+    tools:context=".view.fragment.MyMissionFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -13,7 +13,6 @@
         tools:context=".MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -26,7 +25,7 @@
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textView_myMission"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -37,33 +36,34 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/imageView_myMission_list"
                     android:layout_width="20dp"
                     android:layout_height="16dp"
                     android:layout_marginEnd="14dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_myMission"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="@+id/textView_myMission"
                     app:srcCompat="@drawable/ic_list" />
 
                 <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout_allMission"
+                    android:id="@+id/tabLayout_myMission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:tabMode="scrollable"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+                    app:layout_constraintTop_toBottomOf="@+id/textView_myMission"
+                    app:tabMaxWidth="0dp"
+                    app:tabGravity="fill"
+                    app:tabMode="fixed" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/gray_50"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tabLayout_allMission">
+                    app:layout_constraintTop_toBottomOf="@+id/tabLayout_myMission">
 
                     <TextView
                         android:id="@+id/textView2"
@@ -84,7 +84,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_allMission"
+            android:id="@+id/recyclerView_myMission"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

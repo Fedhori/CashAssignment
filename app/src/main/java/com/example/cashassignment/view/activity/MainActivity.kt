@@ -17,6 +17,7 @@ import com.example.cashassignment.view.adapter.DrawerNavigationAdapter
 import com.example.cashassignment.view.adapter.DrawerPointAdapter
 import com.example.cashassignment.view.fragment.AllMissionFragment
 import com.example.cashassignment.view.fragment.HomeFragment
+import com.example.cashassignment.view.fragment.MyMissionFragment
 import com.example.cashassignment.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -128,6 +129,12 @@ class MainActivity : AppCompatActivity(),
         ).commit()
     }
 
+    private fun initMyMission(){
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home,
+            MyMissionFragment()
+        ).commit()
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.navigation_home ->{
@@ -137,7 +144,7 @@ class MainActivity : AppCompatActivity(),
                 initAllMission()
             }
             R.id.navigation_my_mission ->{
-                initHome()
+                initMyMission()
             }
         }
         return true

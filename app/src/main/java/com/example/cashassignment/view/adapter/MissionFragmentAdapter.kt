@@ -11,9 +11,8 @@ import com.example.cashassignment.enumclasses.Level
 import com.example.cashassignment.model.TaskEntity
 import com.example.cashassignment.view.ItemClickListener
 import kotlinx.android.synthetic.main.view_all_mission_task.view.*
-import kotlinx.android.synthetic.main.view_new_mission_task.view.*
 
-class AllMissionAdapter: RecyclerView.Adapter<AllMissionAdapter.ViewHolder>() {
+class MissionFragmentAdapter: RecyclerView.Adapter<MissionFragmentAdapter.ViewHolder>() {
 
     private var taskList: List<TaskEntity>? = null
     private lateinit var itemClickListener: ItemClickListener
