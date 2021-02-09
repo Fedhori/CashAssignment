@@ -4,11 +4,13 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.example.cashassignment.enumclasses.TaskCategory
 import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.model.TaskEntity
 import com.example.cashassignment.model.UserDetailEntity
 import com.example.cashassignment.repository.HomeRepository
+import com.google.android.gms.tasks.Task
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -30,8 +32,8 @@ class HomeViewModel: ViewModel(), KoinComponent {
         return homeRepository.getBannerData()
     }
 
-    fun getTaskData() : LiveData<List<TaskEntity>>{
-        return homeRepository.getTaskData()
+    fun getTaskData(category: TaskCategory = TaskCategory.ALL) : LiveData<List<TaskEntity>>{
+        return homeRepository.getTaskData(category)
     }
 
     fun getBundleData() : LiveData<List<BundleEntity>>{

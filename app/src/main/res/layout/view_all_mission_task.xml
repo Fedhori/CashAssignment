@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="104dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_allMission"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/img_badge_begginer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_allMission"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:progress="60"
+        android:progressDrawable="@drawable/ring_progress"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_allMission_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="20dp"
+        android:text="카페 설문조사"
+        app:layout_constraintStart_toEndOf="@+id/imageView_allMission"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_allMission_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="건당 1200원"
+        app:layout_constraintStart_toStartOf="@+id/textView_allMission_title"
+        app:layout_constraintTop_toBottomOf="@+id/textView_allMission_title" />
+
+    <ImageView
+        android:id="@+id/imageView_allMission_heart"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_alarm" />
+
+    <TextView
+        android:id="@+id/textView_allMission_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="22dp"
+        android:text="신입"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView_allMission_level"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_allMission_level"
+        app:layout_constraintEnd_toStartOf="@+id/textView_allMission_level"
+        app:layout_constraintTop_toTopOf="@+id/textView_allMission_level"
+        app:srcCompat="@drawable/img_badge_ready" />
+
+    <TextView
+        android:id="@+id/textView_allMission_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="0/1"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_allMission_level"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_allMission_level"
+        app:layout_constraintTop_toTopOf="@+id/imageView_allMission_level" />
+</androidx.constraintlayout.widget.ConstraintLayout>

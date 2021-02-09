@@ -75,24 +75,9 @@ class HomeRepository : CoroutineScope by MainScope(){
 
         return liveData
     }
-    /*
-    private fun getBannerLoginData(): LiveData<List<BannerEntity>>{
-        //TODO
-        return MutableLiveData<List<BannerEntity>>()
-    }
-
-   private fun getBannerNotLoginData(country: String): LiveData<List<BannerEntity>>{
-
-        val liveData = MutableLiveData<List<BannerEntity>>()
-        launch(Dispatchers.Main){
-            liveData.value = notLoginBannerApi.getBanners(country).body()?.toList()
-        }
-        return liveData
-    }
-     */
 
     //TODO need to implement APIs to get parameters
-    fun getTaskData(): LiveData<List<TaskEntity>>{
+    fun getTaskData(category: TaskCategory = TaskCategory.ALL): LiveData<List<TaskEntity>>{
 
         val liveData = MutableLiveData<List<TaskEntity>>()
 
@@ -102,14 +87,14 @@ class HomeRepository : CoroutineScope by MainScope(){
                     token = getToken(),
                     authType = getAuthType(),
                     page = 0,
-                    category = TaskCategory.ALL,
+                    category = category,
                     taskOrderStrategy = TaskOrderStrategy.NEW).body()?.toList()
             }
             else{
                 liveData.value = taskNotLoginApi.getTasks(
                     country = "KO",
                     page = 0,
-                    category = TaskCategory.ALL,
+                    category = category,
                     orderStrategy = TaskOrderStrategy.NEW)
                     .body()?.toList()
             }
