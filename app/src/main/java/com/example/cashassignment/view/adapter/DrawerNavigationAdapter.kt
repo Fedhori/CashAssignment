@@ -1,12 +1,12 @@
-package com.example.cashassignment.view
+package com.example.cashassignment.view.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cashassignment.R
 import com.example.cashassignment.item.DrawerNavigationItem
+import com.example.cashassignment.view.ItemClickListener
 import kotlinx.android.synthetic.main.drawer_home_navigation.view.*
 
 class DrawerNavigationAdapter : RecyclerView.Adapter<DrawerNavigationAdapter.ViewHolder>(){

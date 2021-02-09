@@ -7,7 +7,7 @@
 
         <variable
             name="activity"
-            type="com.example.cashassignment.view.MainActivity" />
+            type="com.example.cashassignment.view.activity.MainActivity" />
 
         <variable
             name="viewModel"

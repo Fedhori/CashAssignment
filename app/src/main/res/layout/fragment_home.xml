@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".view.HomeFragment">
+    tools:context=".view.fragment.HomeFragment">
 
     <ScrollView
         android:id="@+id/scrollView_home"
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FCFCFC"
-            tools:context=".view.MainActivity">
+            tools:context=".view.activity.MainActivity">
 
             <ProgressBar
                 android:id="@+id/progressBar2"

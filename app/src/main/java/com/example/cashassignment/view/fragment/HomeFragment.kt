@@ -1,4 +1,4 @@
-package com.example.cashassignment.view
+package com.example.cashassignment.view.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -6,20 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.GravityCompat
 import androidx.lifecycle.LiveData
 import com.example.cashassignment.R
 import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.model.TaskEntity
+import com.example.cashassignment.view.ItemClickListener
+import com.example.cashassignment.view.activity.MainActivity
+import com.example.cashassignment.view.customview.MissionView
+import com.example.cashassignment.view.adapter.BannerViewPagerAdapter
+import com.example.cashassignment.view.adapter.MyMissionViewAdapter
+import com.example.cashassignment.view.adapter.NewMissionViewAdapter
 import com.example.cashassignment.viewmodel.HomeViewModel
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.drawer_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.view_mission.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.java.KoinJavaComponent.inject
 
 class HomeFragment : Fragment() {
 
@@ -62,10 +64,13 @@ class HomeFragment : Fragment() {
     }
     
     private fun setNewMissions(newMissionLiveData: LiveData<List<TaskEntity>>){
-        val newMissionView = MissionView(this)
-        val taskViewAdapter = NewMissionViewAdapter()
+        val newMissionView =
+            MissionView(this)
+        val taskViewAdapter =
+            NewMissionViewAdapter()
 
-        taskViewAdapter.setItemClickListener( object: ItemClickListener{
+        taskViewAdapter.setItemClickListener( object:
+            ItemClickListener {
             override fun onClick(view: View, position: Int) {
                 Log.d("test", "${newMissionLiveData.value?.get(position)?.title}")
             }
@@ -81,10 +86,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun setMyMissions(myMissionLiveData: LiveData<List<TaskEntity>>){
-        val myMissionView = MissionView(this)
-        val taskViewAdapter = MyMissionViewAdapter()
+        val myMissionView =
+            MissionView(this)
+        val taskViewAdapter =
+            MyMissionViewAdapter()
 
-        taskViewAdapter.setItemClickListener( object: ItemClickListener{
+        taskViewAdapter.setItemClickListener( object:
+            ItemClickListener {
             override fun onClick(view: View, position: Int) {
                 Log.d("test", "${myMissionLiveData.value?.get(position)?.title}")
             }
@@ -107,10 +115,13 @@ class HomeFragment : Fragment() {
 
     private fun setBundle(bundleData: List<BundleEntity>){
         for(bundle in bundleData){
-            val missionView = MissionView(this)
-            val taskViewAdapter = NewMissionViewAdapter()
+            val missionView =
+                MissionView(this)
+            val taskViewAdapter =
+                NewMissionViewAdapter()
 
-            taskViewAdapter.setItemClickListener( object: ItemClickListener{
+            taskViewAdapter.setItemClickListener( object:
+                ItemClickListener {
                 override fun onClick(view: View, position: Int) {
                     Log.d("test", bundle.taskTitles[position].title)
                 }

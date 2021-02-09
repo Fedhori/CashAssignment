@@ -1,4 +1,4 @@
-package com.example.cashassignment.view
+package com.example.cashassignment.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +12,11 @@ import com.example.cashassignment.R
 import com.example.cashassignment.item.DrawerNavigationItem
 import com.example.cashassignment.item.DrawerPointItem
 import com.example.cashassignment.model.UserDetailEntity
+import com.example.cashassignment.view.ItemClickListener
+import com.example.cashassignment.view.adapter.DrawerNavigationAdapter
+import com.example.cashassignment.view.adapter.DrawerPointAdapter
+import com.example.cashassignment.view.fragment.AllMissionFragment
+import com.example.cashassignment.view.fragment.HomeFragment
 import com.example.cashassignment.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -57,7 +62,8 @@ class MainActivity : AppCompatActivity(),
     }
     
     private fun setDrawerPointAdapter(userDetailLiveData: LiveData<UserDetailEntity>){
-        val drawerPointAdapter = DrawerPointAdapter()
+        val drawerPointAdapter =
+            DrawerPointAdapter()
         val pointItemList = ArrayList<DrawerPointItem>()
 
         layout_navigationView.recyclerView_drawer_login_point.adapter = drawerPointAdapter
@@ -72,7 +78,8 @@ class MainActivity : AppCompatActivity(),
             drawerPointAdapter.submitList(pointItemList)
         })
 
-        drawerPointAdapter.setItemClickListener( object: ItemClickListener{
+        drawerPointAdapter.setItemClickListener( object:
+            ItemClickListener {
             override fun onClick(view: View, position: Int) {
                 Log.d("test", pointItemList[position].title)
             }
@@ -94,7 +101,8 @@ class MainActivity : AppCompatActivity(),
 
         drawerNavigationAdapter.submitList(navigationItemList)
 
-        drawerNavigationAdapter.setItemClickListener( object: ItemClickListener{
+        drawerNavigationAdapter.setItemClickListener( object:
+            ItemClickListener {
             override fun onClick(view: View, position: Int) {
                 Log.d("test", navigationItemList[position].title)
             }
@@ -109,7 +117,15 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun initHome(){
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home, HomeFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home,
+            HomeFragment()
+        ).commit()
+    }
+
+    private fun initAllMission(){
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home,
+            AllMissionFragment()
+        ).commit()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -118,7 +134,7 @@ class MainActivity : AppCompatActivity(),
                 initHome()
             }
             R.id.navigation_all_mission ->{
-                initHome()
+                initAllMission()
             }
             R.id.navigation_my_mission ->{
                 initHome()

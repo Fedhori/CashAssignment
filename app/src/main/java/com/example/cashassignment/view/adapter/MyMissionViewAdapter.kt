@@ -1,7 +1,5 @@
-package com.example.cashassignment.view
+package com.example.cashassignment.view.adapter
 
-import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.cashassignment.R
 import com.example.cashassignment.enumclasses.Level
 import com.example.cashassignment.model.TaskEntity
+import com.example.cashassignment.view.ItemClickListener
 import kotlinx.android.synthetic.main.view_my_mission_task.view.*
 
 class MyMissionViewAdapter : RecyclerView.Adapter<MyMissionViewAdapter.ViewHolder>() {

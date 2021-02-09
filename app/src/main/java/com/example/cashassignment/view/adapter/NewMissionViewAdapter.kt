@@ -1,7 +1,5 @@
-package com.example.cashassignment.view
+package com.example.cashassignment.view.adapter
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.cashassignment.R
 import com.example.cashassignment.enumclasses.Level
 import com.example.cashassignment.model.TaskEntity
+import com.example.cashassignment.view.ItemClickListener
 import kotlinx.android.synthetic.main.view_new_mission_task.view.*
 
 class NewMissionViewAdapter: RecyclerView.Adapter<NewMissionViewAdapter.ViewHolder>() {
@@ -22,7 +21,10 @@ class NewMissionViewAdapter: RecyclerView.Adapter<NewMissionViewAdapter.ViewHold
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_new_mission_task, parent, false))
+        ViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.view_new_mission_task, parent, false)
+        )
 
     override fun getItemCount(): Int = taskList?.size ?: 0
 

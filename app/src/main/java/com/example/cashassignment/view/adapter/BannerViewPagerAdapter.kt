@@ -1,6 +1,5 @@
-package com.example.cashassignment.view
+package com.example.cashassignment.view.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cashassignment.R
 import com.example.cashassignment.model.BannerEntity
+import com.example.cashassignment.view.fragment.HomeFragment
 import kotlinx.android.synthetic.main.view_banner.view.*
 
 class BannerViewPagerAdapter(private val context: HomeFragment) :
@@ -19,7 +19,9 @@ class BannerViewPagerAdapter(private val context: HomeFragment) :
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_banner, parent, false))
+        ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.view_banner, parent, false)
+        )
 
     override fun getItemCount(): Int = bannerList?.size ?: 0
 
