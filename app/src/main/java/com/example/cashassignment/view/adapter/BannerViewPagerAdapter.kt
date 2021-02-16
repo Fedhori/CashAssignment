@@ -10,7 +10,7 @@ import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.view.fragment.HomeFragment
 import kotlinx.android.synthetic.main.view_banner.view.*
 
-class BannerViewPagerAdapter(private val context: HomeFragment) :
+class BannerViewPagerAdapter :
    RecyclerView.Adapter<BannerViewPagerAdapter.ViewHolder>() {
 
     private var bannerList: List<BannerEntity>? = null
@@ -37,7 +37,7 @@ class BannerViewPagerAdapter(private val context: HomeFragment) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: BannerEntity?){
             with(itemView){
-                Glide.with(context).load(item?.thumbnailUrl).into(itemView.imageView_banner)
+                Glide.with(context).load(item?.thumbnailUrl).into(imageView_banner)
             }
         }
     }

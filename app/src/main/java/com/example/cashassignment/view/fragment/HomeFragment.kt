@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
 
     private fun setBanners(bannerLiveData: LiveData<List<BannerEntity>>){
 
-        val bannerViewPagerAdapter = BannerViewPagerAdapter(this)
+        val bannerViewPagerAdapter = BannerViewPagerAdapter()
         viewPager2_home_banner.adapter = bannerViewPagerAdapter
 
         bannerLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer { bannerData ->

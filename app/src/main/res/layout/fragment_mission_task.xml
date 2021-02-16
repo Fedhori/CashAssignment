@@ -9,7 +9,7 @@
     android:focusable="true">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView_allMission"
+        android:id="@+id/imageView_missionFragment"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginTop="16dp"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/progressBar_allMission"
+        android:id="@+id/progressBar_missionFragment"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="64dp"
         android:layout_height="64dp"
@@ -31,26 +31,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_allMission_title"
+        android:id="@+id/textView_missionFragment_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="20dp"
         android:text="카페 설문조사"
-        app:layout_constraintStart_toEndOf="@+id/imageView_allMission"
+        app:layout_constraintStart_toEndOf="@+id/imageView_missionFragment"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_allMission_price"
+        android:id="@+id/textView_missionFragment_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="건당 1200원"
-        app:layout_constraintStart_toStartOf="@+id/textView_allMission_title"
-        app:layout_constraintTop_toBottomOf="@+id/textView_allMission_title" />
+        app:layout_constraintStart_toStartOf="@+id/textView_missionFragment_title"
+        app:layout_constraintTop_toBottomOf="@+id/textView_missionFragment_title" />
 
     <ImageView
-        android:id="@+id/imageView_allMission_heart"
+        android:id="@+id/imageView_missionFragment_heart"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_marginTop="27dp"
@@ -60,7 +60,7 @@
         app:srcCompat="@drawable/ic_alarm" />
 
     <TextView
-        android:id="@+id/textView_allMission_level"
+        android:id="@+id/textView_missionFragment_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
@@ -70,22 +70,22 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView_allMission_level"
+        android:id="@+id/imageView_missionFragment_level"
         android:layout_width="13dp"
         android:layout_height="13dp"
         android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_allMission_level"
-        app:layout_constraintEnd_toStartOf="@+id/textView_allMission_level"
-        app:layout_constraintTop_toTopOf="@+id/textView_allMission_level"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_missionFragment_level"
+        app:layout_constraintEnd_toStartOf="@+id/textView_missionFragment_level"
+        app:layout_constraintTop_toTopOf="@+id/textView_missionFragment_level"
         app:srcCompat="@drawable/img_badge_ready" />
 
     <TextView
-        android:id="@+id/textView_allMission_count"
+        android:id="@+id/textView_missionFragment_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="0/1"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView_allMission_level"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_allMission_level"
-        app:layout_constraintTop_toTopOf="@+id/imageView_allMission_level" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_missionFragment_level"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_missionFragment_level"
+        app:layout_constraintTop_toTopOf="@+id/imageView_missionFragment_level" />
 </androidx.constraintlayout.widget.ConstraintLayout>
