@@ -1,9 +1,11 @@
 package com.example.cashassignment.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
 import com.example.cashassignment.enumclasses.TaskCategory
 import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.BundleEntity
@@ -34,6 +36,10 @@ class HomeViewModel: ViewModel(), KoinComponent {
 
     fun getTaskData(category: TaskCategory = TaskCategory.ALL) : LiveData<List<TaskEntity>>{
         return homeRepository.getTaskData(category)
+    }
+
+    fun getTaskPageData() : LiveData<PagedList<TaskEntity>>{
+        return homeRepository.getTaskPageData()
     }
 
     fun getBundleData() : LiveData<List<BundleEntity>>{

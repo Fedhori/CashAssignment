@@ -1,5 +1,6 @@
 package com.example.cashassignment
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,6 +13,7 @@ object BaseService {
             instance = Retrofit.Builder()
                 .baseUrl(BASE_URL_API)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
         }
         return instance!!

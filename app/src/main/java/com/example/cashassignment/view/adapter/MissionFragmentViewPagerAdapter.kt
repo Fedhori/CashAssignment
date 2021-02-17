@@ -1,8 +1,12 @@
 package com.example.cashassignment.view.adapter
 
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cashassignment.R
@@ -15,7 +19,7 @@ import kotlinx.android.synthetic.main.view_recyclerview.view.*
 class MissionFragmentViewPagerAdapter :
     RecyclerView.Adapter<MissionFragmentViewPagerAdapter.ViewHolder>() {
 
-    private var listOfTaskList : Array<MutableList<TaskEntity>?> = arrayOfNulls(TaskCategory.values().size)
+    private var listOfTaskList : Array<PagedList<TaskEntity>?> = arrayOfNulls(TaskCategory.values().size)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,20 +35,13 @@ class MissionFragmentViewPagerAdapter :
         holder.bind(listOfTaskList[position])
     }
 
-    fun submitList(position: Int, taskList: MutableList<TaskEntity>?){
-
-        if(this.listOfTaskList[position] != null){
-            taskList?.let { this.listOfTaskList[position]?.addAll(it) }
-        }
-        else{
-            this.listOfTaskList[position] = taskList
-        }
-        //this.listOfTaskList.add(taskList)
+    fun submitList(position: Int, taskList: PagedList<TaskEntity>){
+        listOfTaskList[position] = taskList
         notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(taskList: List<TaskEntity>?){
+        fun bind(taskList: PagedList<TaskEntity>?){
             with(itemView){
                 val missionFragmentAdapter = MissionFragmentAdapter()
                 recyclerView_missionFragment.adapter = missionFragmentAdapter

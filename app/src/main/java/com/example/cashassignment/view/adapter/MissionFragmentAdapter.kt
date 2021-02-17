@@ -1,53 +1,55 @@
 package com.example.cashassignment.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cashassignment.R
 import com.example.cashassignment.enumclasses.Level
 import com.example.cashassignment.model.TaskEntity
 import com.example.cashassignment.view.ItemClickListener
+import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.fragment_mission_task.view.*
 
-class MissionFragmentAdapter: RecyclerView.Adapter<MissionFragmentAdapter.ViewHolder>() {
+class MissionFragmentAdapter: PagedListAdapter<TaskEntity, MissionFragmentAdapter.ViewHolder>(COMPARATOR) {
 
-    private var taskList: List<TaskEntity>? = null
     private lateinit var itemClickListener: ItemClickListener
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ViewHolder =
-        ViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_mission_task, parent, false)
-        )
-
-    override fun getItemCount(): Int = taskList?.size ?: 0
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_mission_task, parent, false)
+        return ViewHolder(view)
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(taskList?.get(position))
+        getItem(position)?.let{holder.bind(it)}
 
         holder.itemView.setOnClickListener{
             itemClickListener.onClick(it, position)
         }
     }
 
-    fun submitList(taskList: List<TaskEntity>?){
-        this.taskList = taskList
-
-        notifyDataSetChanged()
-    }
-
     fun setItemClickListener(itemClickListener: ItemClickListener){
         this.itemClickListener = itemClickListener
     }
 
+    companion object {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<TaskEntity>() {
+            override fun areItemsTheSame(oldItem: TaskEntity, newItem: TaskEntity): Boolean =
+                oldItem.taskKey == newItem.taskKey
+
+            override fun areContentsTheSame(oldItem: TaskEntity, newItem: TaskEntity): Boolean =
+                oldItem == newItem
+        }
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: TaskEntity?){
+
             with(itemView){
                 Glide.with(context).load(item?.mainSmallThumbnailUrl).into(itemView.imageView_missionFragment)
                 textView_missionFragment_title.text = item?.title

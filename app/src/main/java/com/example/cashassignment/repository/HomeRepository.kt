@@ -2,10 +2,17 @@ package com.example.cashassignment.repository
 
 import android.app.Activity
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.observe
+import androidx.paging.DataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.example.cashassignment.BaseService
 import com.example.cashassignment.api.*
+import com.example.cashassignment.datasource.TaskDataSource
+import com.example.cashassignment.datasource.TaskDataSourceFactory
 import com.example.cashassignment.di.KoinApplication
 import com.example.cashassignment.enumclasses.AuthType
 import com.example.cashassignment.enumclasses.TaskCategory
@@ -49,6 +56,25 @@ class HomeRepository : CoroutineScope by MainScope(){
 
     private fun getAuthType(): AuthType{
         return AuthType.valueOf(sharedPreferences.getString("authType", "PHONE")?: "")
+    }
+
+    fun getTaskPageData(): LiveData<PagedList<TaskEntity>>{
+
+        val dataSourceFactory = object : DataSource.Factory<Int, TaskEntity>() {
+            override fun create(): DataSource<Int, TaskEntity> {
+                return TaskDataSource()
+            }
+        }
+
+        val pagedListConfig = PagedList.Config.Builder()
+            .setPageSize(7)
+            //.setPrefetchDistance(2)
+            .setEnablePlaceholders(true)
+            .build()
+
+        val taskLiveData = LivePagedListBuilder<Int, TaskEntity>(dataSourceFactory, pagedListConfig).build()
+
+        return taskLiveData
     }
 
     fun getUserDetail(): LiveData<UserDetailEntity>{
