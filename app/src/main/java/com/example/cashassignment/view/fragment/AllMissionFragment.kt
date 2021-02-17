@@ -47,7 +47,7 @@ class AllMissionFragment : Fragment() {
 
         for(category in TaskCategory.values()){
 
-            homeViewModel.getTaskPageData().observe(viewLifecycleOwner, Observer {
+            homeViewModel.getTaskPageData(category).observe(viewLifecycleOwner, Observer {
                 missionFragmentViewPagerAdapter.submitList(category.ordinal, it)
             })
         }

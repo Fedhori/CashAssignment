@@ -38,8 +38,8 @@ class HomeViewModel: ViewModel(), KoinComponent {
         return homeRepository.getTaskData(category)
     }
 
-    fun getTaskPageData() : LiveData<PagedList<TaskEntity>>{
-        return homeRepository.getTaskPageData()
+    fun getTaskPageData(category: TaskCategory = TaskCategory.ALL) : LiveData<PagedList<TaskEntity>>{
+        return homeRepository.getTaskPageData(category)
     }
 
     fun getBundleData() : LiveData<List<BundleEntity>>{
