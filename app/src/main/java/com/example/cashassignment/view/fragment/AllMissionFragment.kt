@@ -55,11 +55,5 @@ class AllMissionFragment : Fragment() {
         TabLayoutMediator(tabLayout_missionFragment, viewPager2_missionFragment){ tab, position ->
             tab.text = TaskCategory.values()[position].toString()
         }.attach()
-        /*
-        Handler(Looper.getMainLooper()).postDelayed({
-            missionFragmentViewPagerAdapter.submitList(0, liveData.value!!)
-            //Do something after 100ms
-        }, 2000)
-         */
     }
 }
