@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
         })
 
         TabLayoutMediator(tabLayout_home_banner, viewPager2_home_banner){ tab, position ->
-            //TODO implement tabLayout
+
         }.attach()
     }
     

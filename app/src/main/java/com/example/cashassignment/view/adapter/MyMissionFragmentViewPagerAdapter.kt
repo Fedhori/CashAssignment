@@ -1,30 +1,23 @@
 package com.example.cashassignment.view.adapter
 
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.cashassignment.R
 import com.example.cashassignment.enumclasses.TaskCategory
 import com.example.cashassignment.model.TaskEntity
 import com.example.cashassignment.view.ItemClickListener
+import com.example.cashassignment.view.fragment.MyMissionFragment
 import com.example.cashassignment.viewmodel.HomeViewModel
-import kotlinx.android.synthetic.main.fragment_mission.*
-import kotlinx.android.synthetic.main.fragment_mission_task.view.*
 import kotlinx.android.synthetic.main.view_recyclerview.view.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.experimental.property.inject
 
-class MissionFragmentViewPagerAdapter(private val homeViewModel: HomeViewModel) :
-    RecyclerView.Adapter<MissionFragmentViewPagerAdapter.ViewHolder>() {
-
-    private var listOfTaskList : Array<PagedList<TaskEntity>?> = arrayOfNulls(TaskCategory.values().size)
+class MyMissionFragmentViewPagerAdapter(
+    private val myMissionFragment: MyMissionFragment) :
+    RecyclerView.Adapter<MyMissionFragmentViewPagerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -32,18 +25,26 @@ class MissionFragmentViewPagerAdapter(private val homeViewModel: HomeViewModel) 
     ): ViewHolder =
         ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.view_recyclerview, parent, false),
-            homeViewModel
+            myMissionFragment.homeViewModel
         )
 
-    override fun getItemCount(): Int = listOfTaskList.size
+    // There are only 2 tabs in 찜한 미션, 쵝근에 한 미션
+    override fun getItemCount(): Int = 2
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listOfTaskList[position])
-    }
+        when(position){
+            0 -> {
+                //TODO implement getDibsList api
+            }
 
-    fun submitList(position: Int, taskList: PagedList<TaskEntity>){
-        listOfTaskList[position] = taskList
-        notifyDataSetChanged()
+            1 -> {
+                //TODO implement recent task api
+                myMissionFragment.homeViewModel.getTaskPageData(TaskCategory.values()[position]).observe(myMissionFragment, Observer {
+                    holder.bind(it)
+                })
+            }
+        }
+
     }
 
     class ViewHolder(itemView: View, private val homeViewModel: HomeViewModel) : RecyclerView.ViewHolder(itemView) {
@@ -77,8 +78,7 @@ class MissionFragmentViewPagerAdapter(private val homeViewModel: HomeViewModel) 
                                 missionFragmentAdapter.fillIcon()
                                 taskList?.get(position)?.id?.let { homeViewModel.postDibs(it) }
                             }
-
-                            notifyItemChanged(position)
+                            notifyDataSetChanged()
                         }
                     })
                 }

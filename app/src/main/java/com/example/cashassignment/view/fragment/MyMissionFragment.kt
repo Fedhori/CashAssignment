@@ -1,27 +1,25 @@
 package com.example.cashassignment.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
+import androidx.viewpager2.widget.ViewPager2
 import com.example.cashassignment.R
-import com.example.cashassignment.enumclasses.TaskCategory
-import com.example.cashassignment.model.TaskEntity
-import com.example.cashassignment.view.ItemClickListener
-import com.example.cashassignment.view.adapter.MissionFragmentAdapter
+import com.example.cashassignment.view.activity.MainActivity
+import com.example.cashassignment.view.adapter.MyMissionFragmentViewPagerAdapter
 import com.example.cashassignment.viewmodel.HomeViewModel
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_mission.*
-import kotlinx.android.synthetic.main.view_mission.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyMissionFragment : Fragment() {
 
-    private val homeViewModel : HomeViewModel by viewModel()
-    private val taskViewAdapter = MissionFragmentAdapter()
+    val homeViewModel : HomeViewModel by viewModel()
+    private lateinit var myMissionFragmentViewPagerAdapter : MyMissionFragmentViewPagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,5 +29,31 @@ class MyMissionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        setUI()
+        initViewPager()
+    }
+
+    private fun setUI(){
+        tabLayout_missionFragment.tabMode = TabLayout.MODE_FIXED
+        imageView_missionFragment_list.setOnClickListener{
+            (activity as MainActivity).openDrawer()
+        }
+    }
+
+    private fun initViewPager(){
+        myMissionFragmentViewPagerAdapter = MyMissionFragmentViewPagerAdapter(this)
+        viewPager2_missionFragment.adapter = myMissionFragmentViewPagerAdapter
+        viewPager2_missionFragment.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                myMissionFragmentViewPagerAdapter.notifyDataSetChanged()
+            }
+        })
+
+        TabLayoutMediator(tabLayout_missionFragment, viewPager2_missionFragment){ tab, position ->
+            when(position){
+                0 -> tab.text = "찜한 미션"
+                1 -> tab.text = "최근 미션"
+            }
+        }.attach()
     }
 }

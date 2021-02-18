@@ -50,7 +50,6 @@ class MissionFragmentAdapter: PagedListAdapter<TaskEntity, MissionFragmentAdapte
     }
 
     fun fillIcon(){
-        Log.d("test", "yo")
         view.imageView_missionFragment_heart.setImageResource(R.drawable.ic_heart_fill)
     }
 
