@@ -28,7 +28,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class AllMissionFragment : Fragment() {
 
     private val homeViewModel : HomeViewModel by viewModel()
-    private val missionFragmentViewPagerAdapter = MissionFragmentViewPagerAdapter()
+    private lateinit var missionFragmentViewPagerAdapter : MissionFragmentViewPagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -43,6 +43,7 @@ class AllMissionFragment : Fragment() {
     }
 
     private fun initViewPager(){
+        missionFragmentViewPagerAdapter = MissionFragmentViewPagerAdapter(homeViewModel)
         viewPager2_missionFragment.adapter = missionFragmentViewPagerAdapter
 
         for(category in TaskCategory.values()){

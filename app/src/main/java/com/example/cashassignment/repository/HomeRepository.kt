@@ -38,6 +38,8 @@ class HomeRepository : CoroutineScope by MainScope(){
 
     private val userDetailApi = baseService.create(UserDetailApi::class.java)
 
+    private val dibsApi = baseService.create(DibsApi::class.java)
+
     private val privacyDetailApi = baseService.create(PrivacyDetailApi::class.java)
 
     private val sharedPreferences: SharedPreferences = KoinApplication.instance.context().
@@ -55,6 +57,24 @@ class HomeRepository : CoroutineScope by MainScope(){
         return AuthType.valueOf(sharedPreferences.getString("authType", "PHONE")?: "")
     }
 
+    fun postDibs(taskId: Long){
+        launch(Dispatchers.Main){
+            dibsApi.postDibs(getToken(), getAuthType(), taskId)
+        }
+    }
+
+    fun deleteDibs(taskId: Long){
+        launch(Dispatchers.Main){
+            dibsApi.deleteDibs(getToken(), getAuthType(), taskId)
+        }
+    }
+
+    /*
+    fun getDibsList(taskId: Long) : LiveData<List<TaskEntity>>{
+        //TODO use datasource
+    }
+     */
+
     fun getTaskPageData(category: TaskCategory = TaskCategory.ALL): LiveData<PagedList<TaskEntity>>{
 
         val dataSourceFactory = object : DataSource.Factory<Int, TaskEntity>() {
@@ -65,7 +85,6 @@ class HomeRepository : CoroutineScope by MainScope(){
 
         val pagedListConfig = PagedList.Config.Builder()
             .setPageSize(7)
-            //.setPrefetchDistance(2)
             .setEnablePlaceholders(true)
             .build()
 

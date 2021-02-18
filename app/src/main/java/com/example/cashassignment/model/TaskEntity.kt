@@ -52,7 +52,7 @@ data class TaskEntity (
     val maxCount: Int,
 
     @SerializedName("isDibs")
-    val isDibs: Boolean,
+    var isDibs: Boolean,
 
     @SerializedName("taskUserStatus")
     val taskUserStatus: TaskUserStatus,

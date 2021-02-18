@@ -19,22 +19,43 @@ import kotlinx.android.synthetic.main.fragment_mission_task.view.*
 class MissionFragmentAdapter: PagedListAdapter<TaskEntity, MissionFragmentAdapter.ViewHolder>(COMPARATOR) {
 
     private lateinit var itemClickListener: ItemClickListener
+    private lateinit var dibsClickListener: ItemClickListener
+    private lateinit var view: View
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_mission_task, parent, false)
+        view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_mission_task, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let{holder.bind(it)}
 
-        holder.itemView.setOnClickListener{
-            itemClickListener.onClick(it, position)
+        with(holder.itemView){
+            setOnClickListener{
+                itemClickListener.onClick(it, position)
+            }
+
+            imageView_missionFragment_heart.setOnClickListener{
+                dibsClickListener.onClick(it, position)
+            }
         }
     }
 
     fun setItemClickListener(itemClickListener: ItemClickListener){
         this.itemClickListener = itemClickListener
+    }
+
+    fun setDibsClickListener(dibsClickListener: ItemClickListener){
+        this.dibsClickListener = dibsClickListener
+    }
+
+    fun fillIcon(){
+        Log.d("test", "yo")
+        view.imageView_missionFragment_heart.setImageResource(R.drawable.ic_heart_fill)
+    }
+
+    fun emptyIcon(){
+        view.imageView_missionFragment_heart.setImageResource(R.drawable.ic_heart)
     }
 
     companion object {
@@ -54,12 +75,14 @@ class MissionFragmentAdapter: PagedListAdapter<TaskEntity, MissionFragmentAdapte
                 Glide.with(context).load(item?.mainSmallThumbnailUrl).into(itemView.imageView_missionFragment)
                 textView_missionFragment_title.text = item?.title
                 textView_missionFragment_price.text = "건당 ${item?.showingPrice}원"
+
                 if(item?.maxCount != 0){
                     textView_missionFragment_count.text = "${item?.userCount}/${item?.maxCount}"
                 }
                 else{
                     textView_missionFragment_count.text = "${item?.userCount}/∞"
                 }
+
                 if(item?.targetAmount == 0 || item?.targetAmount == null){
                     progressBar_missionFragment.progress = 0
                 }
@@ -88,6 +111,13 @@ class MissionFragmentAdapter: PagedListAdapter<TaskEntity, MissionFragmentAdapte
                         textView_missionFragment_level.text = "스파이"
                         textView_missionFragment_level.setTextColor(ContextCompat.getColor(context, R.color.gray_600))
                     }
+                }
+
+                if(item?.isDibs == true){
+                    imageView_missionFragment_heart.setImageResource(R.drawable.ic_heart_fill)
+                }
+                else{
+                    imageView_missionFragment_heart.setImageResource(R.drawable.ic_heart)
                 }
             }
         }
