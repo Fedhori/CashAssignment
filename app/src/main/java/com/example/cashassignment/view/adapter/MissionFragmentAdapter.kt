@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.example.cashassignment.model.TaskEntity
 import com.example.cashassignment.view.ItemClickListener
 import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.fragment_mission_task.view.*
+import kotlinx.android.synthetic.main.view_recyclerview.view.*
 
 class MissionFragmentAdapter: PagedListAdapter<TaskEntity, MissionFragmentAdapter.ViewHolder>(COMPARATOR) {
 
@@ -28,6 +30,7 @@ class MissionFragmentAdapter: PagedListAdapter<TaskEntity, MissionFragmentAdapte
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         getItem(position)?.let{holder.bind(it)}
 
         with(holder.itemView){

@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
+import com.example.cashassignment.enumclasses.AuthType
 import com.example.cashassignment.enumclasses.Statuses
 import com.example.cashassignment.enumclasses.TaskCategory
 import com.example.cashassignment.model.BannerEntity
@@ -24,6 +25,19 @@ import org.koin.core.component.inject
 class HomeViewModel: ViewModel(), KoinComponent {
 
     private val homeRepository : HomeRepository by inject()
+
+
+    fun logOut(){
+        homeRepository.logOut()
+    }
+
+    fun getToken(): String{
+        return homeRepository.getToken()
+    }
+
+    fun getAuthType(): AuthType{
+        return homeRepository.getAuthType()
+    }
 
     fun checkIsLogin(): Boolean{
         return homeRepository.checkIsLogin()

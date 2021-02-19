@@ -47,15 +47,25 @@ class HomeRepository : CoroutineScope by MainScope(){
     private val sharedPreferences: SharedPreferences = KoinApplication.instance.context().
     getSharedPreferences("storage", Activity.MODE_PRIVATE)
 
+    private val editor = sharedPreferences.edit()
+
     fun checkIsLogin(): Boolean{
         return sharedPreferences.getBoolean("isLogin", false)
     }
 
-    private fun getToken(): String{
+    fun logOut(){
+        editor.remove("token")
+        editor.remove("authType")
+        editor.remove("isLogin")
+        editor.apply()
+        editor.commit()
+    }
+
+    fun getToken(): String{
         return sharedPreferences.getString("token", "") ?: ""
     }
 
-    private fun getAuthType(): AuthType{
+    fun getAuthType(): AuthType{
         return AuthType.valueOf(sharedPreferences.getString("authType", "PHONE")?: "")
     }
 

@@ -59,7 +59,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView_missionFragment_title"
                     app:tabMode="scrollable" />
 
-                    <!--
+                <!--
                     app:tabMaxWidth="0dp"
                     app:tabGravity="fill"
                     app:tabMode="fixed"
@@ -95,7 +95,9 @@
             android:id="@+id/viewPager2_missionFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </androidx.viewpager2.widget.ViewPager2>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
