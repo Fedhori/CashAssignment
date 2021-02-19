@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
+import com.example.cashassignment.enumclasses.Statuses
 import com.example.cashassignment.enumclasses.TaskCategory
 import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.BundleEntity
@@ -42,6 +43,14 @@ class HomeViewModel: ViewModel(), KoinComponent {
 
     fun deleteDibs(taskId: Long){
         homeRepository.deleteDibs(taskId)
+    }
+
+    fun getRecentPageData() : LiveData<PagedList<TaskEntity>>{
+        return homeRepository.getRecentPageData()
+    }
+
+    fun getDibsPageData() : LiveData<PagedList<TaskEntity>>{
+        return homeRepository.getDibsPageData()
     }
 
     fun getTaskData(category: TaskCategory = TaskCategory.ALL) : LiveData<List<TaskEntity>>{

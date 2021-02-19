@@ -19,4 +19,11 @@ interface TaskApi {
         @Query("category") category: TaskCategory,
         @Query("orderStrategy") taskOrderStrategy: TaskOrderStrategy
     ): Response<List<TaskEntity>>
+
+    @GET("/task/recent/list")
+    suspend fun getRecentPageData(
+        @Header("Authorization") token: String,
+        @Header("AuthType") authType: AuthType,
+        @Query("page") page: Int
+    ): Response<List<TaskEntity>>
 }

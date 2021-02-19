@@ -34,12 +34,15 @@ class MyMissionFragmentViewPagerAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when(position){
             0 -> {
-                //TODO implement getDibsList api
+                myMissionFragment.homeViewModel.getDibsPageData().observe(myMissionFragment, Observer {
+                    holder.bind(it)
+                })
+
             }
 
             1 -> {
                 //TODO implement recent task api
-                myMissionFragment.homeViewModel.getTaskPageData(TaskCategory.values()[position]).observe(myMissionFragment, Observer {
+                myMissionFragment.homeViewModel.getRecentPageData().observe(myMissionFragment, Observer {
                     holder.bind(it)
                 })
             }

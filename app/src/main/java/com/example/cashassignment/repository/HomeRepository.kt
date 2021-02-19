@@ -9,6 +9,8 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.cashassignment.BaseService
 import com.example.cashassignment.api.*
+import com.example.cashassignment.datasource.DibsDataSource
+import com.example.cashassignment.datasource.RecentDataSource
 import com.example.cashassignment.datasource.TaskDataSource
 import com.example.cashassignment.di.KoinApplication
 import com.example.cashassignment.enumclasses.AuthType
@@ -69,11 +71,37 @@ class HomeRepository : CoroutineScope by MainScope(){
         }
     }
 
-    /*
-    fun getDibsList(taskId: Long) : LiveData<List<TaskEntity>>{
-        //TODO use datasource
+
+    fun getDibsPageData() : LiveData<PagedList<TaskEntity>>{
+        val dataSourceFactory = object : DataSource.Factory<Int, TaskEntity>() {
+            override fun create(): DataSource<Int, TaskEntity> {
+                return DibsDataSource()
+            }
+        }
+
+        val pagedListConfig = PagedList.Config.Builder()
+            .setPageSize(10)
+            .setEnablePlaceholders(true)
+            .build()
+
+        return LivePagedListBuilder<Int, TaskEntity>(dataSourceFactory, pagedListConfig).build()
     }
-     */
+
+    fun getRecentPageData(): LiveData<PagedList<TaskEntity>>{
+
+        val dataSourceFactory = object : DataSource.Factory<Int, TaskEntity>() {
+            override fun create(): DataSource<Int, TaskEntity> {
+                return RecentDataSource()
+            }
+        }
+
+        val pagedListConfig = PagedList.Config.Builder()
+            .setPageSize(7)
+            .setEnablePlaceholders(true)
+            .build()
+
+        return LivePagedListBuilder<Int, TaskEntity>(dataSourceFactory, pagedListConfig).build()
+    }
 
     fun getTaskPageData(category: TaskCategory = TaskCategory.ALL): LiveData<PagedList<TaskEntity>>{
 
