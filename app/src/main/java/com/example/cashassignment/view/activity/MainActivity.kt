@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import com.example.cashassignment.R
 import com.example.cashassignment.item.DrawerNavigationItem
@@ -117,34 +118,22 @@ class MainActivity : AppCompatActivity(),
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 
-    private fun initHome(){
+    private fun initFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home,
-            HomeFragment()
-        ).commit()
-    }
-
-    private fun initAllMission(){
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home,
-            AllMissionFragment()
-        ).commit()
-    }
-
-    private fun initMyMission(){
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayout_home,
-            MyMissionFragment()
+            fragment
         ).commit()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.navigation_home ->{
-                initHome()
+                initFragment(HomeFragment())
             }
             R.id.navigation_all_mission ->{
-                initAllMission()
+                initFragment(AllMissionFragment())
             }
             R.id.navigation_my_mission ->{
-                initMyMission()
+                initFragment(MyMissionFragment())
             }
         }
         return true
