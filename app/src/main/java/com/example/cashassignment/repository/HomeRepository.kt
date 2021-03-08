@@ -27,12 +27,7 @@ import kotlinx.coroutines.launch
 
 class HomeRepository : CoroutineScope by MainScope(){
 
-    //change
-
-    private val sadf = 1
-    private val sadafadg = 1
-
-    private val sadasda = 1
+    private val waaaagh = 1
 
     private val baseService = BaseService.getInstance()
 
