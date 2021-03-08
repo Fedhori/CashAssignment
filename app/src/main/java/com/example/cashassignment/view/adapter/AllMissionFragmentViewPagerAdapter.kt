@@ -33,6 +33,13 @@ class AllMissionFragmentViewPagerAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         allMissionFragment.homeViewModel.getTaskPageData(TaskCategory.values()[position]).observe(allMissionFragment, Observer {
             holder.bind(it)
+            it.addWeakCallback(null, object: PagedList.Callback() {
+                override fun onChanged(position: Int, count: Int) {}
+                override fun onInserted(position: Int, count: Int) {
+                    holder.itemView.constraintLayout_missionFragment_empty.visibility = View.GONE
+                }
+                override fun onRemoved(position: Int, count: Int) {}
+            })
         })
     }
 
@@ -57,17 +64,19 @@ class AllMissionFragmentViewPagerAdapter(
                     setDibsClickListener( object:
                         ItemClickListener {
                         override fun onClick(view: View, position: Int) {
-                            if(taskList?.get(position)?.isDibs == true){
-                                taskList?.get(position)?.isDibs = false
-                                missionFragmentAdapter.emptyIcon()
-                                taskList?.get(position)?.id?.let { homeViewModel.deleteDibs(it) }
+                            if(homeViewModel.checkIsLogin()){
+                                if(taskList?.get(position)?.isDibs == true){
+                                    taskList?.get(position)?.isDibs = false
+                                    missionFragmentAdapter.emptyIcon()
+                                    taskList?.get(position)?.id?.let { homeViewModel.deleteDibs(it) }
+                                }
+                                else{
+                                    taskList?.get(position)?.isDibs = true
+                                    missionFragmentAdapter.fillIcon()
+                                    taskList?.get(position)?.id?.let { homeViewModel.postDibs(it) }
+                                }
+                                notifyDataSetChanged()
                             }
-                            else{
-                                taskList?.get(position)?.isDibs = true
-                                missionFragmentAdapter.fillIcon()
-                                taskList?.get(position)?.id?.let { homeViewModel.postDibs(it) }
-                            }
-                            notifyDataSetChanged()
                         }
                     })
                 }

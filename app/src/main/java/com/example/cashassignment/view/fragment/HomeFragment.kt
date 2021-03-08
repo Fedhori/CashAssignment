@@ -1,5 +1,6 @@
 package com.example.cashassignment.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import com.example.cashassignment.model.BannerEntity
 import com.example.cashassignment.model.BundleEntity
 import com.example.cashassignment.model.TaskEntity
 import com.example.cashassignment.view.ItemClickListener
+import com.example.cashassignment.view.activity.LoginActivity
 import com.example.cashassignment.view.activity.MainActivity
 import com.example.cashassignment.view.customview.MissionView
 import com.example.cashassignment.view.adapter.BannerViewPagerAdapter
@@ -47,6 +49,25 @@ class HomeFragment : Fragment() {
         button_home_list.setOnClickListener{
             (activity as MainActivity).openDrawer()
         }
+
+        textView_home_point.setOnClickListener{
+            if(homeViewModel.checkIsLogin()){
+                logOut()
+            }
+            else{
+                goToLoginActivity()
+            }
+        }
+    }
+
+    private fun logOut(){
+        homeViewModel.logOut()
+        startActivity(Intent(this.activity, MainActivity::class.java))
+        this.activity?.finish()
+    }
+
+    private fun goToLoginActivity(){
+        startActivity(Intent(this.activity, LoginActivity::class.java))
     }
 
     private fun setBanners(bannerLiveData: LiveData<List<BannerEntity>>){

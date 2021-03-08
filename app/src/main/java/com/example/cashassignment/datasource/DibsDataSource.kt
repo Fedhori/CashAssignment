@@ -2,6 +2,7 @@ package com.example.cashassignment.datasource
 
 import android.app.Activity
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.example.cashassignment.BaseService
 import com.example.cashassignment.api.DibsApi
@@ -62,7 +63,7 @@ class DibsDataSource(
     ) {
         launch(Dispatchers.Main){
             getDibsData(page = 0, statuses = listOf(Statuses.IN_PROGRESS, Statuses.STOPPED, Statuses.FINISHED)){
-                callback.onResult(it ?: listOf(), null, 1)
+                callback.onResult(it ?: listOf() , null, 1)
             }
         }
     }

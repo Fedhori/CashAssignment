@@ -1,5 +1,6 @@
 package com.example.cashassignment.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.cashassignment.R
+import com.example.cashassignment.view.activity.LoginActivity
 import com.example.cashassignment.view.activity.MainActivity
 import com.example.cashassignment.view.adapter.MyMissionFragmentViewPagerAdapter
 import com.example.cashassignment.viewmodel.HomeViewModel
