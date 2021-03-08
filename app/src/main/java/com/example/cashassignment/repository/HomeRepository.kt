@@ -30,6 +30,7 @@ class HomeRepository : CoroutineScope by MainScope(){
     private val sadasff = 1
     private val adasf = 1
     private val test1 = 1
+    private val test2 = 2
 
     private val baseService = BaseService.getInstance()
 
