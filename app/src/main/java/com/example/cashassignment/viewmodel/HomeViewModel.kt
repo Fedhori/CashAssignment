@@ -25,6 +25,7 @@ import org.koin.core.component.inject
 class HomeViewModel: ViewModel(), KoinComponent {
 
     //Hello
+    //asdf
 
     private val homeRepository : HomeRepository by inject()
 
